@@ -2,22 +2,22 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sensormenu/sensormenu.h"
+
+#include "sensorMenu/SensorMenu.h"
+#include "../controller/Controller.h"
+
+class Controller;
+class SensorMenu;
 
 class MainWindow : public QMainWindow{
 private:
+    Controller* controller;
     QMenuBar* menuBar;
     SensorMenu* sensorMenu;
     void createMenu();
     void setupUI();
 public:
     explicit MainWindow(QWidget* parent=0);
-protected:
-
-public slots:
-    void newFile();
-    void openFile();
-    void saveFile();
 };
 
 #endif // MAINWINDOW_H

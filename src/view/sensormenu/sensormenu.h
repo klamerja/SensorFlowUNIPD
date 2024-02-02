@@ -2,12 +2,15 @@
 #define SENSORMENU_H
 
 #include <QDockWidget>
+#include "../MainWindow.h"
 
-//QDockWidget element to be incorporated in the UI
+class MainWindow;
 
 class SensorMenu : public QDockWidget{
+private:
+    MainWindow* app;
 public:
-    SensorMenu();
+    SensorMenu(MainWindow*);
 };
 
 #endif // SENSORMENU_H

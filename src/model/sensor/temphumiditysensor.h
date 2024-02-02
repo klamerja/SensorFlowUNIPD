@@ -1,21 +1,21 @@
 #ifndef TEMPHUMIDITYSENSOR_H
 #define TEMPHUMIDITYSENSOR_H
 
-#include "abstractsensor.h"
-#include <string>
+#include "AbstractSensor.h"
 
 class TempHumiditySensor : public AbstractSensor{
 private:
     int temperature;
-    short int humidity;
+    unsigned int humidity;
 public:
-    TempHumiditySensor(std::string);
-    ~TempHumiditySensor() = default;
+    TempHumiditySensor(std::string, QTimer*, std::string);
+    ~TempHumiditySensor() =default;
     int getTemperature() const;
-    short int getHumidity() const;
+    unsigned int getHumidity() const;
     void setTemperature(int);
-    void setHumidity(short int);
-
+    void setHumidity(unsigned int);
+    void request(ISensorHandler*) override;
+    void request(IConstSensorHandler*) override;
 };
 
 #endif // TEMPHUMIDITYSENSOR_H

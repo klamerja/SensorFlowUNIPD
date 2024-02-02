@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>assets/IconApp.png</file>
+        <file>assets/stylesheet.qss</file>
+        <file>assets/Delete(SVGRepo).svg</file>
     </qresource>
 </RCC>

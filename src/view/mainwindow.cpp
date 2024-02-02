@@ -1,14 +1,14 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
-#include <QFileDialog>
-
 #include <QVBoxLayout>
+
 #include <QLineEdit>
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), menuBar(new QMenuBar()), sensorMenu(new SensorMenu()){
+
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)){
     createMenu();
     setupUI();
 }
@@ -26,10 +26,19 @@ void MainWindow::createMenu(){
     QAction* saveFile=fileMenu->addAction("Salva");
     saveFile->setShortcut(Qt::CTRL | Qt::Key_S);
 
+    //Sensors Menu
+    QMenu* sensorsMenu=menuBar->addMenu("Sensori");
+    QAction* newSensor=sensorsMenu->addAction("Aggiungi sensore");
+    newSensor->setShortcut(Qt::CTRL | Qt::Key_T);
+    QAction* deleteSensor=sensorsMenu->addAction("Rimuovi sensore");
+    deleteSensor->setShortcut(Qt::CTRL | Qt::Key_Backspace);
+
     //Connessione delle actions agli slots
-    connect(newFile, &QAction::triggered, this, &MainWindow::newFile);
-    connect(openFile, &QAction::triggered, this, &MainWindow::openFile);
-    connect(openFile, &QAction::triggered, this, &MainWindow::openFile);
+    connect(newFile, &QAction::triggered, controller, &Controller::newFile);
+    connect(openFile, &QAction::triggered, controller, &Controller::openFile);
+    connect(saveFile, &QAction::triggered, controller, &Controller::saveFile);
+    connect(newSensor, &QAction::triggered, controller, &Controller::newSensor);
+    connect(deleteSensor, &QAction::triggered, controller, &Controller::deleteSensor);
 }
 
 void MainWindow::setupUI(){
@@ -39,17 +48,4 @@ void MainWindow::setupUI(){
     layout->addWidget(new QLineEdit());
     test->setLayout(layout);
     setCentralWidget(test);
-}
-
-//Slots config
-void MainWindow::newFile(){
-    //TODO
-}
-
-void MainWindow::openFile(){
-    QString path=QFileDialog::getOpenFileName(this, ("Apri file"), QDir::homePath(),  "JSON Files (*.json)");
-}
-
-void MainWindow::saveFile(){
-    //TODO
 }

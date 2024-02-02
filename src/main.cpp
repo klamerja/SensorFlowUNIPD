@@ -1,11 +1,18 @@
 #include <QApplication>
 #include <QLabel>
 #include <QString>
-#include "view/mainwindow.h"
+#include <QFile>
+
+#include "view/MainWindow.h"
+#include "model/sensor/AbstractSensor.h"
+#include "model/sensor/AirQualitySensor.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    QFile stylesheet(":/assets/stylesheet.qss");
+    stylesheet.open(QFile::ReadOnly);
+    app.setStyleSheet(stylesheet.readAll());
     QIcon icon(":/assets/IconApp.png");
     app.setWindowIcon(icon);
     MainWindow window;
