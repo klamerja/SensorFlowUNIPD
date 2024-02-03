@@ -49,3 +49,7 @@ void MainWindow::setupUI(){
     test->setLayout(layout);
     setCentralWidget(test);
 }
+
+void MainWindow::onItemClicked(){
+    qWarning()<<"Andata";
+}

@@ -1360,9 +1360,6 @@ ItemCard.o: view/sensorMenu/ItemCard.cpp view/sensorMenu/ItemCard.h \
 SensorMenu.o: view/sensorMenu/SensorMenu.cpp view/sensorMenu/SensorMenu.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QDockWidget \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qdockwidget.h \
-		view/sensorMenu/ItemCard.h \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
 		view/MainWindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -1381,6 +1378,9 @@ SensorMenu.o: view/sensorMenu/SensorMenu.cpp view/sensorMenu/SensorMenu.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qjsondocument.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QMap \
 		/opt/homebrew/lib/QtCore.framework/Headers/qmap.h \
+		view/sensorMenu/ItemCard.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
 		model/sensor/TempHumiditySensor.h \
 		model/sensor/PressureSensor.h \
 		model/sensor/ElectricitySensor.h \

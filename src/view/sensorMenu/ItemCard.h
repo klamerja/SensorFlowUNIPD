@@ -24,7 +24,7 @@ public:
     void handle(const TempHumiditySensor*) override;
     void mousePressEvent(QMouseEvent*) override;
 signals:
-    void mousePressed();
+    void itemClicked();
 };
 
 #endif // ITEMCARD_H

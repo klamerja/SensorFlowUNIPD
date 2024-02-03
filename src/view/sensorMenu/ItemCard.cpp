@@ -8,6 +8,7 @@
 #include <QIcon>
 
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), app(main){
+    connect(this, &ItemCard::itemClicked, app, &MainWindow::onItemClicked);
     setObjectName("card");
     setFixedSize(250,100);
 
@@ -110,5 +111,5 @@ void ItemCard::handle(const TempHumiditySensor* sensor){
 }
 
 void ItemCard::mousePressEvent(QMouseEvent* event){
-    emit mousePressed();
+    emit itemClicked();
 }

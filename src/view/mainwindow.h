@@ -18,6 +18,8 @@ private:
     void setupUI();
 public:
     explicit MainWindow(QWidget* parent=0);
+public slots:
+    void onItemClicked();
 };
 
 #endif // MAINWINDOW_H
