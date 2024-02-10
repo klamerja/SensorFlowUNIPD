@@ -4,10 +4,14 @@
 #include <QMainWindow>
 
 #include "sensorMenu/SensorMenu.h"
+#include "sensorMenu/ItemCard.h"
 #include "../controller/Controller.h"
+
+//Nota per domani: includendo Item mi da errore
 
 class Controller;
 class SensorMenu;
+class ItemCard;
 
 class MainWindow : public QMainWindow{
 private:
@@ -19,7 +23,7 @@ private:
 public:
     explicit MainWindow(QWidget* parent=0);
 public slots:
-    void onItemClicked();
+    void onItemClicked(ItemCard*);
 };
 
 #endif // MAINWINDOW_H

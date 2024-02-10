@@ -62,7 +62,8 @@ SOURCES       = main.cpp \
 		model/sensor/TempHumiditySensor.cpp \
 		view/MainWindow.cpp \
 		view/sensorMenu/ItemCard.cpp \
-		view/sensorMenu/SensorMenu.cpp qrc_resources.cpp
+		view/sensorMenu/SensorMenu.cpp qrc_resources.cpp \
+		moc_ItemCard.cpp
 OBJECTS       = main.o \
 		Controller.o \
 		JSONhandler.o \
@@ -74,7 +75,8 @@ OBJECTS       = main.o \
 		MainWindow.o \
 		ItemCard.o \
 		SensorMenu.o \
-		qrc_resources.o
+		qrc_resources.o \
+		moc_ItemCard.o
 DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/device_config.prf \
 		/opt/homebrew/Cellar/qt/6.6.1/share/qt/mkspecs/common/unix.conf \
@@ -1138,8 +1140,41 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra -dM -E -o moc_predefs.h /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_ItemCard.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_ItemCard.cpp
+moc_ItemCard.cpp: view/sensorMenu/ItemCard.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qwidget.h \
+		view/MainWindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		view/sensorMenu/SensorMenu.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QDockWidget \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		controller/Controller.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QObject \
+		/opt/homebrew/lib/QtCore.framework/Headers/qobject.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		model/sensor/AbstractSensor.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h \
+		model/sensor/ISensorHandler.h \
+		model/sensor/IConstSensorHandler.h \
+		model/json/JSONhandler.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QJsonDocument \
+		/opt/homebrew/lib/QtCore.framework/Headers/qjsondocument.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QMap \
+		/opt/homebrew/lib/QtCore.framework/Headers/qmap.h \
+		model/sensor/TempHumiditySensor.h \
+		model/sensor/PressureSensor.h \
+		model/sensor/ElectricitySensor.h \
+		model/sensor/AirQualitySensor.h \
+		moc_predefs.h \
+		/opt/homebrew/share/qt/libexec/moc
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/merjas/Desktop/Git_SYNC/SensorFlowUNIPD/src/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/merjas/Desktop/Git_SYNC/SensorFlowUNIPD/src -I/Users/merjas/Desktop/Git_SYNC/SensorFlowUNIPD/src -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib view/sensorMenu/ItemCard.h -o moc_ItemCard.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -1154,7 +1189,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -1395,6 +1430,9 @@ SensorMenu.o: view/sensorMenu/SensorMenu.cpp view/sensorMenu/SensorMenu.h \
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+moc_ItemCard.o: moc_ItemCard.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ItemCard.o moc_ItemCard.cpp
 
 ####### Install
 

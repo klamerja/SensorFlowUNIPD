@@ -1,7 +1,7 @@
 #ifndef ITEMCARD_H
 #define ITEMCARD_H
 
-#include <QWidget>
+#include <QFrame>
 #include <string>
 
 #include "../MainWindow.h"
@@ -12,7 +12,10 @@
 #include "../../model/sensor/AirQualitySensor.h"
 #include "../../model/sensor/IConstSensorHandler.h"
 
-class ItemCard : public QWidget, public IConstSensorHandler{
+class MainWindow;
+
+class ItemCard : public QFrame, public IConstSensorHandler{
+    Q_OBJECT //A quanto pare, serve per implementare segnali propri quando implementati su una classe di QT
 private:
     AbstractSensor* sensor;
     MainWindow* app;
@@ -23,8 +26,9 @@ public:
     void handle(const PressureSensor*) override;
     void handle(const TempHumiditySensor*) override;
     void mousePressEvent(QMouseEvent*) override;
+
 signals:
-    void itemClicked();
+    void itemClicked(ItemCard*);
 };
 
 #endif // ITEMCARD_H

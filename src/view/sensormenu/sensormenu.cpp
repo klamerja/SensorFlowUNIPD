@@ -20,5 +20,7 @@ SensorMenu::SensorMenu(MainWindow* main) : app(main){
 
     ItemCard* item=new ItemCard(new AirQualitySensor("Stai zitto", new QTimer, "1"), app);
     layout->addWidget(item);
+    item=new ItemCard(new AirQualitySensor("Stai zitto2", new QTimer, "1"), app);
+    layout->addWidget(item);
     layout->addStretch();
 }

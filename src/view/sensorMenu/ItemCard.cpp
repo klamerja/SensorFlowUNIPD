@@ -111,5 +111,5 @@ void ItemCard::handle(const TempHumiditySensor* sensor){
 }
 
 void ItemCard::mousePressEvent(QMouseEvent* event){
-    emit itemClicked();
+    emit itemClicked(this);
 }

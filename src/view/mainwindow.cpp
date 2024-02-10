@@ -50,6 +50,6 @@ void MainWindow::setupUI(){
     setCentralWidget(test);
 }
 
-void MainWindow::onItemClicked(){
-    qWarning()<<"Andata";
+void MainWindow::onItemClicked(ItemCard* item){
+    item->setFocus(Qt::MouseFocusReason);
 }

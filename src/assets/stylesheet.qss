@@ -1,4 +1,4 @@
-QFrame#card{
+QWidget#card{
     border-radius: 20px;
 }
 
