@@ -14,4 +14,7 @@ src/Makefile
 src/resources.qrc
 src/.qmake.stash
 
+src/**/*.o
+src/**/moc_*
+
 build-*
