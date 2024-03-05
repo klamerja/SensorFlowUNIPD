@@ -1,2 +1,17 @@
 .DS_STORE
 **/.vscode/
+
+src/.cache
+src/.qt
+src/.rcc
+src/CMakeFiles
+src/SensorFlow.app
+src/cmake_install.cmake
+src/CMakeCache.txt
+src/CMakeLists.txt
+src/compile_commands.json
+src/Makefile
+src/resources.qrc
+src/.qmake.stash
+
+build-*
