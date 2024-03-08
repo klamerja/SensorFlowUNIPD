@@ -5,11 +5,12 @@
 #include <QAction>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <cstddef>
 
 #include "panel/HomePanel.h"
 #include "panel/DataPanel.h"
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget){
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget), itemFocused(nullptr){
     createMenu();
     setupUI();
 }
