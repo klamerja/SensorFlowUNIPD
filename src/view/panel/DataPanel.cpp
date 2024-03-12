@@ -26,6 +26,7 @@ void DataPanel::handle(const AirQualitySensor* sensor){
 
     //Grafico co2
     QChart* co2Chart=new QChart;
+    co2Chart->setBackgroundBrush(Qt::transparent);
     charts.push_back(co2Chart);
     co2Chart->setAnimationOptions(QChart::AllAnimations);
     co2Chart->addSeries(sensor->getCo2Vals());
