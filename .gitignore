@@ -5,7 +5,7 @@ src/.cache
 src/.qt
 src/.rcc
 src/CMakeFiles
-src/SensorFlow.app
+src/<NomeDel.pro>.app
 src/cmake_install.cmake
 src/CMakeCache.txt
 src/CMakeLists.txt
