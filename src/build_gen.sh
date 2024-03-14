@@ -1,1 +1,1 @@
-qmake && make && ./Sensor && ./SensorFlow.app/Contents/MacOS/SensorFlow && make clean
+qmake && make && ./SensorFlow.app/Contents/MacOS/SensorFlow && make clean
