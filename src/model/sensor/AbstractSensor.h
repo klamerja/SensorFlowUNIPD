@@ -6,7 +6,7 @@
 #include <QRandomGenerator>
 #include <QObject>
 #include <QLineSeries>
-#include <QAreaSeries>
+#include <QSplineSeries>
 #include <QDateTime>
 
 #include "ISensorHandler.h"

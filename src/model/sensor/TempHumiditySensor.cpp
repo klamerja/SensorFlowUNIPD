@@ -4,8 +4,8 @@ TempHumiditySensor::TempHumiditySensor(std::string n, QTimer* t, std::string i) 
     AbstractSensor(n, t, i),
     temperature(0),
     humidity(0),
-    temperatureVals(new QLineSeries),
-    humidityVals(new QLineSeries) {}
+    temperatureVals(new QSplineSeries),
+    humidityVals(new QSplineSeries) {}
 
 int TempHumiditySensor::getTemperature() const{
     return temperature;
@@ -15,11 +15,11 @@ int TempHumiditySensor::getHumidity() const{
     return humidity;
 }
 
-QLineSeries* TempHumiditySensor::getTemperatureVals() const{
+QSplineSeries* TempHumiditySensor::getTemperatureVals() const{
     return temperatureVals;
 }
 
-QLineSeries* TempHumiditySensor::getHumidityVals() const{
+QSplineSeries* TempHumiditySensor::getHumidityVals() const{
     return humidityVals;
 }
 

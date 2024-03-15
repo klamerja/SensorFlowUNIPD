@@ -4,8 +4,8 @@ ElectricitySensor::ElectricitySensor(std::string n, QTimer* t, std::string i) :
     AbstractSensor(n, t, i),
     watt(0),
     voltage(0),
-    wattVals(new QLineSeries),
-    voltageVals(new QLineSeries) {}
+    wattVals(new QSplineSeries),
+    voltageVals(new QSplineSeries) {}
 
 double ElectricitySensor::getWatt() const{
     return watt;
@@ -15,11 +15,11 @@ int ElectricitySensor::getVoltage() const{
     return voltage;
 }
 
-QLineSeries* ElectricitySensor::getWattVals() const{
+QSplineSeries* ElectricitySensor::getWattVals() const{
     return wattVals;
 }
 
-QLineSeries* ElectricitySensor::getVoltageVals() const{
+QSplineSeries* ElectricitySensor::getVoltageVals() const{
     return voltageVals;
 }
 

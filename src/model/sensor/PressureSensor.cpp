@@ -2,13 +2,13 @@
 
 PressureSensor::PressureSensor(std::string n, QTimer* t, std::string i) :
     AbstractSensor(n, t, i), pressure(0),
-    pressureVals(new QLineSeries) {}
+    pressureVals(new QSplineSeries) {}
 
 double PressureSensor::getPressure() const{
     return pressure;
 }
 
-QLineSeries* PressureSensor::getPressureVals() const{
+QSplineSeries* PressureSensor::getPressureVals() const{
     return pressureVals;
 }
 
