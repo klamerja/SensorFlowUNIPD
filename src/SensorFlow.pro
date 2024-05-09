@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = SensorFlow
 INCLUDEPATH += .
 
-QT += core widgets charts
+QT += core widgets charts svg svgwidgets gui
 
 # Input
 SOURCES += main.cpp \
@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     view/panel/DataPanel.cpp \
     view/panel/HomePanel.cpp \
     view/sensorMenu/ItemCard.cpp \
-    view/sensorMenu/SensorMenu.cpp
+    view/sensorMenu/SensorMenu.cpp \
+    view/components/SearchBar.cpp
 
 HEADERS += \
     controller/Controller.h \
@@ -35,7 +36,8 @@ HEADERS += \
     view/panel/DataPanel.h \
     view/panel/HomePanel.h \
     view/sensorMenu/ItemCard.h \
-    view/sensorMenu/SensorMenu.h
+    view/sensorMenu/SensorMenu.h \
+    view/components/SearchBar.h
 
 RESOURCES += \
     resources.qrc

@@ -7,7 +7,7 @@
 
 #include "../MainWindow.h"
 
-class AddPanel : public QWidget{
+class AddPanel : public QDialog{
 private:
     MainWindow* app;
     QLineEdit* nameEdit;

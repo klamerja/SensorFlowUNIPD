@@ -5,12 +5,15 @@
 #include <QAction>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <cstddef>
+#include <QColor>
+#include <QFont>
+#include <QFontDatabase>
 
 #include "panel/HomePanel.h"
 #include "panel/DataPanel.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget), itemFocused(nullptr){
+    setObjectName("mainWindow");
     createMenu();
     setupUI();
 }
@@ -58,8 +61,8 @@ void MainWindow::setupUI(){
     panelContainer->setLayout(hLayout);
 
     QWidget* window=new QWidget;
-    setCentralWidget(window);
     QHBoxLayout* windowLayout=new QHBoxLayout;
+    setCentralWidget(window);
     window->setLayout(windowLayout);
 
     windowLayout->addWidget(sensorMenu);
@@ -102,9 +105,11 @@ void MainWindow::newSensor(){
             delete panel->layout()->takeAt(0)->widget();
             delete panel->layout();
         }
-        QHBoxLayout* layout=new QHBoxLayout;
-        layout->addWidget(new AddPanel(this));
-        panel->setLayout(layout);
+        // QHBoxLayout* layout=new QHBoxLayout;
+        // layout->addWidget(new AddPanel(this));
+        // panel->setLayout(layout);
+        AddPanel* addPanel=new AddPanel(this);
+        addPanel->open();
     }
 }
 

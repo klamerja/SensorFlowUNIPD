@@ -1,5 +1,6 @@
 #include "SensorMenu.h"
 #include "ItemCard.h"
+#include "../components/SearchBar.h"
 
 #include <QVBoxLayout>
 #include <QScrollArea>
@@ -13,9 +14,11 @@ SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidg
     menuLayout->setAlignment(Qt::AlignTop);
     setLayout(menuLayout);
 
-    QLineEdit* searchBar=new QLineEdit;
+    //Creazione search bar
+    SearchBar* searchBar=new SearchBar;
+    searchBar->setObjectName("searchBar");
     menuLayout->addWidget(searchBar);
-    connect(searchBar, &QLineEdit::textChanged, app, &MainWindow::searchWidgets);
+    connect(searchBar, &SearchBar::textChanged, app, &MainWindow::searchWidgets);
 
     QScrollArea* scrollableArea=new QScrollArea;
     scrollableArea->setFrameShape(QFrame::NoFrame);
