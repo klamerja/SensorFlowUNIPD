@@ -19,7 +19,7 @@
 class MainWindow;
 
 class ItemCard : public QFrame, public IConstSensorHandler{
-    Q_OBJECT //A quanto pare, serve per implementare segnali propri quando implementati su una classe di QT
+    Q_OBJECT
 private:
     AbstractSensor* sensor;
     MainWindow* mainWindow;

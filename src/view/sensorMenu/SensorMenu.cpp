@@ -1,8 +1,10 @@
 #include "SensorMenu.h"
 #include "ItemCard.h"
 #include "../components/SearchBar.h"
+#include "../components/AddButton.h"
 
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QLineEdit>
@@ -25,6 +27,13 @@ SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidg
     menuLayout->addWidget(scrollableArea);
     scrollableArea->setWidgetResizable(true); //Altrimenti, lo scroll si adatta ai widget, e quindi non funziona
     scrollableArea->setWidget(sensorsContainer);
+
+    AddButton* addButton=new AddButton;
+    QHBoxLayout* buttonLayout=new QHBoxLayout;
+    buttonLayout->setAlignment(Qt::AlignLeft);
+    menuLayout->addLayout(buttonLayout);
+    buttonLayout->addWidget(addButton);
+    connect(addButton, &AddButton::clicked, app, &MainWindow::newSensor);
 }
 
 void SensorMenu::paintSensors(std::vector<AbstractSensor *> sensors){

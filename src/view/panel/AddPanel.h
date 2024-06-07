@@ -15,7 +15,7 @@ private:
 public:
     AddPanel(MainWindow*);
 public slots:
-    void submit();
+    void onSubmit();
 };
 
 #endif // ADDPANEL_H

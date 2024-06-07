@@ -7,7 +7,9 @@
         <file>assets/SearchBar/Search.svg</file>
         <file>assets/SearchBar/Clear.svg</file>
 
-        <file>assets/Font/Lato.ttf</file>
+        <file>assets/QComboBox/Down.svg</file>
+
+        <file>assets/AddButton.svg</file>
 
         <file>assets/Delete.svg</file>
         <file>assets/Error.png</file>

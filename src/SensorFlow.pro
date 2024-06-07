@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     view/panel/HomePanel.cpp \
     view/sensorMenu/ItemCard.cpp \
     view/sensorMenu/SensorMenu.cpp \
-    view/components/SearchBar.cpp
+    view/components/SearchBar.cpp \
+    view/components/AddButton.cpp
 
 HEADERS += \
     controller/Controller.h \
@@ -37,7 +38,8 @@ HEADERS += \
     view/panel/HomePanel.h \
     view/sensorMenu/ItemCard.h \
     view/sensorMenu/SensorMenu.h \
-    view/components/SearchBar.h
+    view/components/SearchBar.h \
+    view/components/AddButton.h 
 
 RESOURCES += \
     resources.qrc
