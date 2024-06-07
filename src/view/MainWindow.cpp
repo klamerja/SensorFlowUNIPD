@@ -14,7 +14,7 @@
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget), itemFocused(nullptr){
     setObjectName("mainWindow");
-    setWindowModality(Qt::WindowModal);
+    
     createMenu();
     setupUI();
 }
