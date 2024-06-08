@@ -1,5 +1,5 @@
 #include "AddButton.h"
-#include "../MainWindow.h"
+#include <qglobal.h>
 
 AddButton::AddButton() : QSvgWidget(":/assets/AddButton.svg"){
     setObjectName("addButton");

@@ -11,13 +11,7 @@
 #include <QGraphicsDropShadowEffect>
 
 SearchBar::SearchBar(){
-    // QGraphicsDropShadowEffect* effect= new QGraphicsDropShadowEffect;
-    // effect->setBlurRadius(5);
-    // effect->setXOffset(5);
-    // effect->setYOffset(5);
-    // effect->setColor(Qt::black);
-    // setGraphicsEffect(effect);
-    setObjectName("searchBar");
+    setStyleSheet("background-color: #FFFFFF; border-radius: 12px;");
 
     QHBoxLayout* hLayout=new QHBoxLayout;
     hLayout->setAlignment(Qt::AlignVCenter);

@@ -7,10 +7,13 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QPixmap>
+#include <qnamespace.h>
 #include "../MainWindow.h"
 
-
 AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLineEdit), typeSelection(new QComboBox){
+    setModal(true);
+    setWindowFlag(Qt::FramelessWindowHint);
+    
     setObjectName("addPanel");
     typeSelection->setObjectName("addPanel");
 

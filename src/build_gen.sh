@@ -1,1 +1,1 @@
-make && ./SensorFlow.app/Contents/MacOS/SensorFlow
+make && ./SensorFlow

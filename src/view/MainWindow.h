@@ -6,12 +6,10 @@
 #include "sensorMenu/SensorMenu.h"
 #include "sensorMenu/ItemCard.h"
 #include "../controller/Controller.h"
-#include "panel/AddPanel.h"
 
 class Controller;
 class SensorMenu;
 class ItemCard;
-class AddPanel;
 
 enum sensorType {AirQuality, Electricity, Pressure, TemperatureHumidity};
 

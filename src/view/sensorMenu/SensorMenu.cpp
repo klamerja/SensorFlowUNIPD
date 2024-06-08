@@ -11,6 +11,8 @@
 
 SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidget){
     setFixedWidth(300);
+    sensorsContainer->setStyleSheet("background-color: rgb(236,236,236);");
+    
     //Layout del pannello sensori
     QVBoxLayout* menuLayout=new QVBoxLayout;
     menuLayout->setAlignment(Qt::AlignTop);

@@ -8,13 +8,16 @@
 #include <QColor>
 #include <QFont>
 #include <QFontDatabase>
+#include <qapplication.h>
+#include <qdebug.h>
 
 #include "panel/HomePanel.h"
 #include "panel/DataPanel.h"
+#include "panel/AddPanel.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget), itemFocused(nullptr){
-    setObjectName("mainWindow");
-    
+    setStyleSheet("background-color: #ECECEC;");
+
     createMenu();
     setupUI();
 }
@@ -24,6 +27,7 @@ void MainWindow::removeFocusedItem(){
 }
 
 void MainWindow::createMenu(){
+    menuBar->setStyleSheet("background-color: #EFEFEF;");
     setMenuBar(menuBar);
 
     //File Menu
@@ -101,16 +105,13 @@ void MainWindow::setHomePanel(){
 //SLOTS
 void MainWindow::newSensor(){
     if(itemFocused)itemFocused->clearFocus();
-    if(!controller->isJsonInstanced()){
+    if(controller->isJsonInstanced()){
         if(panel->layout()){
             delete panel->layout()->takeAt(0)->widget();
             delete panel->layout();
         }
-        // QHBoxLayout* layout=new QHBoxLayout;
-        // layout->addWidget(new AddPanel(this));
-        // panel->setLayout(layout);
         AddPanel* addPanel=new AddPanel(this);
-        addPanel->open();
+        addPanel->exec();
     }
 }
 

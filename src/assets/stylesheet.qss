@@ -2,18 +2,12 @@
     color: rgb(68, 68, 68);
 }
 
-#searchBar{
-    background-color: rgba(255,255,255,100%);
-    border-radius: 12px;
-}
-
 #searchEdit{
     background-color: rgba(0,0,0,0%);
-    placeholder-text-color: rgb(169, 169, 169);
 }
 
 QDialog#addPanel{
-    background-color: rgb(236,236,236);
+    background-color: #ececec;
 }
 
 QComboBox#addPanel{
@@ -29,10 +23,6 @@ QComboBox#addPanel:down-arrow{
     width: 18px;
 }
 
-#mainWindow{
-    background-color: rgb(236,236,236);
-}
-
 QWidget#card{
     border-radius: 20px;
 }
@@ -46,3 +36,4 @@ QFrame#card:focus{
     border: 1px solid #00E0FF;
     border-radius: 20px;
 }
+
