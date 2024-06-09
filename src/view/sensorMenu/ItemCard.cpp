@@ -8,6 +8,7 @@
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(main), layout(new QHBoxLayout), labelsLayout(new QVBoxLayout), labels(new QWidget), name(new QLabel(QString::fromStdString(sensor->getName()))), deleteButton(new QPushButton){
     setObjectName("card");
     setFixedSize(250,100);
+    setStyleSheet("background-color: #FFFFFF;");
 
     QPixmap deleteIcon(":/assets/Delete.svg");
     deleteButton->setIcon(deleteIcon);
