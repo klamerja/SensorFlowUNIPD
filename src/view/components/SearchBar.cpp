@@ -23,7 +23,6 @@ SearchBar::SearchBar(){
     searchIcon->setAutoFillBackground(false);
 
     QLineEdit* searchEdit=new QLineEdit;
-    searchEdit->setObjectName("searchEdit");
     searchEdit->setFrame(false);
     searchEdit->setFixedHeight(20);
     QFont searchEditFont(searchEdit->font());

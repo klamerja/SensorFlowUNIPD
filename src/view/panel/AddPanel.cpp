@@ -13,9 +13,6 @@
 AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLineEdit), typeSelection(new QComboBox){
     setModal(true);
     setWindowFlag(Qt::FramelessWindowHint);
-    
-    setObjectName("addPanel");
-    typeSelection->setObjectName("addPanel");
 
     QVBoxLayout* layout=new QVBoxLayout;
     layout->setAlignment(Qt::AlignVCenter);
@@ -39,6 +36,7 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
 
     //Submit Button
     QPushButton* submitButton=new QPushButton("Crea sensore");
+    submitButton->setStyleSheet("background-color: #0ABAB5; border-radius: 12px; padding: 5px; color: #FFFFFF; font-size: 14px;");
     submitButton->setFixedWidth(200);
     submitButton->setDefault(true);
     QHBoxLayout* buttonLayout=new QHBoxLayout;
@@ -46,6 +44,7 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
     buttonLayout->addWidget(submitButton);
 
     //Connessione del submit
+    connect(this, &QDialog::rejected, this, &AddPanel::onReject);
     connect(submitButton, &QPushButton::clicked, this, &AddPanel::onSubmit);
 
     //Composizione form
@@ -54,6 +53,10 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
 
     //Impostazione della fixed size del Dialog
     setFixedSize(sizeHint());
+}
+
+void AddPanel::onReject(){
+    app->setHomePanel();
 }
 
 void AddPanel::onSubmit(){

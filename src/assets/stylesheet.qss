@@ -6,17 +6,6 @@
     background-color: rgba(0,0,0,0%);
 }
 
-QDialog#addPanel{
-    background-color: #ececec;
-}
-
-QComboBox#addPanel{
-    border: 1px solid rgb(255,255,255);
-    background-color: rgb(255,255,255);
-    border-radius: 12px;
-    padding: 5px 5px 5px 5px;
-}
-
 QComboBox#addPanel:down-arrow{
     background-color: rgba(0, 0, 0, 0);
     image: url(:/assets/QComboBox/Down.svg);

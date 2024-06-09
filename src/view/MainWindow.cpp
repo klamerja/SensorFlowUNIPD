@@ -105,7 +105,7 @@ void MainWindow::setHomePanel(){
 //SLOTS
 void MainWindow::newSensor(){
     if(itemFocused)itemFocused->clearFocus();
-    if(controller->isJsonInstanced()){
+    if(!controller->isJsonInstanced()){
         if(panel->layout()){
             delete panel->layout()->takeAt(0)->widget();
             delete panel->layout();

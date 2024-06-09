@@ -68,10 +68,6 @@ void ItemCard::handle(const TempHumiditySensor*){
     layout->addWidget(deleteButton);
 }
 
-ItemCard::~ItemCard(){
-    delete layout;
-}
-
 void ItemCard::mousePressEvent(QMouseEvent*){
     emit itemClicked(this);
 }
@@ -88,5 +84,9 @@ AbstractSensor* ItemCard::getSensor() const{
 
 void ItemCard::deleteItem(){
     mainWindow->deleteSensor(this);
+}
+
+ItemCard::~ItemCard(){
+    delete layout;
 }
 

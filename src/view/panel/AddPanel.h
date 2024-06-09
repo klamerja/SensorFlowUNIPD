@@ -15,6 +15,7 @@ private:
 public:
     AddPanel(MainWindow*);
 public slots:
+    void onReject();
     void onSubmit();
 };
 

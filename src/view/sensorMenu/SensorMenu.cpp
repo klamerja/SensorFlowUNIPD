@@ -13,12 +13,10 @@ SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidg
     setFixedWidth(300);
     sensorsContainer->setStyleSheet("background-color: rgb(236,236,236);");
     
-    //Layout del pannello sensori
     QVBoxLayout* menuLayout=new QVBoxLayout;
     menuLayout->setAlignment(Qt::AlignTop);
     setLayout(menuLayout);
 
-    //Creazione search bar
     SearchBar* searchBar=new SearchBar;
     searchBar->setObjectName("searchBar");
     menuLayout->addWidget(searchBar);
