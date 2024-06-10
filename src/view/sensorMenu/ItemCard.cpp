@@ -1,20 +1,21 @@
 #include "ItemCard.h"
+#include "view/MainWindow.h"
 
 #include <QString>
 #include <QPixmap>
 #include <QIcon>
-#include <QApplication>
+#include <QSvgWidget>
 
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(main), layout(new QHBoxLayout), labelsLayout(new QVBoxLayout), labels(new QWidget), name(new QLabel(QString::fromStdString(sensor->getName()))), deleteButton(new QPushButton){
-    setObjectName("card");
+    setStyleSheet("background-color: palette(base); border-radius: 12px;");
+    connect(main, &MainWindow::themeChanged, this, &ItemCard::updateBackground);
     setFixedSize(250,100);
-    setStyleSheet("background-color: #FFFFFF;");
 
-    QPixmap deleteIcon(":/assets/Delete.svg");
+    QIcon deleteIcon(":/assets/Delete.svg");
     deleteButton->setIcon(deleteIcon);
     deleteButton->setFixedSize(35,35);
     deleteButton->setFlat(true);
-    deleteButton->setIconSize(QSize(18,18));
+    deleteButton->setIconSize(QSize(20,20));
 
     connect(this, &ItemCard::itemClicked, mainWindow, &MainWindow::onItemClicked);
     connect(deleteButton, &QPushButton::clicked, this, &ItemCard::deleteItem);
@@ -85,6 +86,10 @@ AbstractSensor* ItemCard::getSensor() const{
 
 void ItemCard::deleteItem(){
     mainWindow->deleteSensor(this);
+}
+
+void ItemCard::updateBackground(){
+    setStyleSheet("background-color: palette(base); border-radius: 12px");
 }
 
 ItemCard::~ItemCard(){

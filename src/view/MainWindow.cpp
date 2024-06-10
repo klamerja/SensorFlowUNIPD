@@ -16,8 +16,6 @@
 #include "panel/AddPanel.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Controller(this)), menuBar(new QMenuBar()), sensorMenu(new SensorMenu(this)), panel(new QWidget), itemFocused(nullptr){
-    setStyleSheet("background-color: #ECECEC;");
-
     createMenu();
     setupUI();
 }
@@ -75,8 +73,8 @@ void MainWindow::setupUI(){
     setHomePanel();
 }
 
-void MainWindow::addSensor(const QString& name,int type){
-    controller->addSensor(name,type);
+void MainWindow::addSensor(const QString& name, int type){
+    controller->addSensor(name, type);
 }
 
 void MainWindow::repaintSensorsList(std::vector<AbstractSensor*> sensors){
@@ -105,7 +103,7 @@ void MainWindow::setHomePanel(){
 //SLOTS
 void MainWindow::newSensor(){
     if(itemFocused)itemFocused->clearFocus();
-    if(controller->isJsonInstanced()){
+    if(!controller->isJsonInstanced()){
         if(panel->layout()){
             delete panel->layout()->takeAt(0)->widget();
             delete panel->layout();
@@ -138,5 +136,12 @@ void MainWindow::onItemClicked(ItemCard* item){
 
 void MainWindow::searchWidgets(const QString& text) const{
     controller->searchWidgets(text);
+}
+
+bool MainWindow::event(QEvent* event){
+    if(event->type()==QEvent::ApplicationPaletteChange){
+        emit themeChanged();
+    }
+    return QMainWindow::event(event);
 }
 

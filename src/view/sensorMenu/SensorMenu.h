@@ -15,6 +15,8 @@ private:
 public:
     SensorMenu(MainWindow*);
     void paintSensors(std::vector<AbstractSensor*>);
+private slots:
+    void updateBackground();
 };
 
 #endif // SENSORMENU_H

@@ -1,5 +1,7 @@
 #include "SearchBar.h"
+#include "view/MainWindow.h"
 
+#include <QApplication>
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QSvgWidget>
@@ -10,12 +12,13 @@
 #include <QIcon>
 #include <QGraphicsDropShadowEffect>
 
-SearchBar::SearchBar(){
-    setStyleSheet("background-color: #FFFFFF; border-radius: 12px;");
-
+SearchBar::SearchBar(MainWindow* main){
     QHBoxLayout* hLayout=new QHBoxLayout;
     hLayout->setAlignment(Qt::AlignVCenter);
     setLayout(hLayout);
+    
+    setStyleSheet("background-color: palette(base); border-radius: 12px");
+    connect(main, &MainWindow::themeChanged, this, &SearchBar::updateBackground);
 
     QSvgWidget* searchIcon=new QSvgWidget(":/assets/SearchBar/Search.svg");
     searchIcon->setFixedSize(20,20);
@@ -23,6 +26,8 @@ SearchBar::SearchBar(){
     searchIcon->setAutoFillBackground(false);
 
     QLineEdit* searchEdit=new QLineEdit;
+    searchEdit->setStyleSheet("background-color: rgba(0,0,0,0)"); //Guarda qua
+    searchEdit->setAutoFillBackground(true);
     searchEdit->setFrame(false);
     searchEdit->setFixedHeight(20);
     QFont searchEditFont(searchEdit->font());
@@ -39,4 +44,8 @@ SearchBar::SearchBar(){
     connect(searchEdit, &QLineEdit::textChanged, [&](const QString& s){
         emit textChanged(s);
     });
+}
+
+void SearchBar::updateBackground(){
+    setStyleSheet("background-color: palette(base); border-radius: 12px");
 }

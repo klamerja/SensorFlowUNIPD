@@ -11,14 +11,15 @@
 
 SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidget){
     setFixedWidth(300);
-    sensorsContainer->setStyleSheet("background-color: rgb(236,236,236);");
-    
+
+    setStyleSheet("background-color: palette(window)");
+    connect(main, &MainWindow::themeChanged, this, &SensorMenu::updateBackground);
+
     QVBoxLayout* menuLayout=new QVBoxLayout;
     menuLayout->setAlignment(Qt::AlignTop);
     setLayout(menuLayout);
 
-    SearchBar* searchBar=new SearchBar;
-    searchBar->setObjectName("searchBar");
+    SearchBar* searchBar=new SearchBar(main);
     menuLayout->addWidget(searchBar);
     connect(searchBar, &SearchBar::textChanged, app, &MainWindow::searchWidgets);
 
@@ -54,4 +55,8 @@ void SensorMenu::paintSensors(std::vector<AbstractSensor *> sensors){
     }
 
     layout->addStretch();
+}
+
+void SensorMenu::updateBackground(){
+    setStyleSheet("background-color: palette(window)");
 }

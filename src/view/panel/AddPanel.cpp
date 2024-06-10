@@ -13,13 +13,10 @@
 AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLineEdit), typeSelection(new QComboBox){
     setModal(true);
     setWindowFlag(Qt::FramelessWindowHint);
-    setStyleSheet("background-color: #FFFFFF;");
 
     QVBoxLayout* layout=new QVBoxLayout;
     layout->setAlignment(Qt::AlignVCenter);
     setLayout(layout);
-
-    nameEdit->setStyleSheet("border-radius: 8px; background-color: #ECECEC; padding: 2px;");
 
     //Creazione Form
     QFormLayout* formLayout=new QFormLayout;
@@ -40,7 +37,6 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
 
     //Submit Button
     QPushButton* submitButton=new QPushButton("Crea sensore");
-    submitButton->setStyleSheet("background-color: #0ABAB5; border-radius: 12px; color: #FFFFFF; font-size: 14px; font-weight: 600;");
     submitButton->setDefault(true);
     QHBoxLayout* buttonLayout=new QHBoxLayout;
     buttonLayout->setAlignment(Qt::AlignHCenter);
@@ -64,7 +60,7 @@ void AddPanel::onReject(){
 
 void AddPanel::onSubmit(){
     if(!nameEdit->text().isEmpty()){
-        app->addSensor(nameEdit->text(),typeSelection->currentIndex());
+        app->addSensor(nameEdit->text(), typeSelection->currentIndex());
         done(QDialog::Accepted);
         app->setHomePanel();
     }else{
@@ -72,10 +68,7 @@ void AddPanel::onSubmit(){
         error.setStandardButtons(QMessageBox::Close);
         error.setModal(true);
         error.setWindowFlag(Qt::FramelessWindowHint);
-        error.setStyleSheet("background-color: #FFFFFF;");
         error.setText("Per favore inserire un nome");
-        //QPixmap errorIcon(":/assets/Error.svg");
-        //error.setIconPixmap(errorIcon);
         error.exec();
     }
 }

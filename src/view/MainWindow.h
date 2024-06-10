@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QEvent>
 
 #include "sensorMenu/SensorMenu.h"
 #include "sensorMenu/ItemCard.h"
@@ -14,6 +15,7 @@ class ItemCard;
 enum sensorType {AirQuality, Electricity, Pressure, TemperatureHumidity};
 
 class MainWindow : public QMainWindow{
+    Q_OBJECT
 private:
     Controller* controller;
     QMenuBar* menuBar;
@@ -29,11 +31,15 @@ public:
     void repaintSensorsList(std::vector<AbstractSensor*>);
     void deleteSensor(ItemCard*);
     void setHomePanel();
+protected:
+    bool event(QEvent* event) override;
 public slots:
     void newSensor();
     void removeSensor();
     void onItemClicked(ItemCard*);
     void searchWidgets(const QString& text) const;
+signals:
+    void themeChanged();
 };
 
 #endif // MAINWINDOW_H

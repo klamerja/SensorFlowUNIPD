@@ -43,6 +43,8 @@ signals:
     void itemClicked(ItemCard*);
 public slots:
     void deleteItem();
+private slots:
+    void updateBackground();
 };
 
 #endif // ITEMCARD_H
