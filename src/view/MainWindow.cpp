@@ -5,11 +5,6 @@
 #include <QAction>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QColor>
-#include <QFont>
-#include <QFontDatabase>
-#include <qapplication.h>
-#include <qdebug.h>
 
 #include "panel/HomePanel.h"
 #include "panel/DataPanel.h"

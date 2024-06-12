@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = SensorFlow
 INCLUDEPATH += .
-
+ICON = SensorFlow.icns
 QT += core widgets charts svg svgwidgets gui
 
 # Input

@@ -12,7 +12,7 @@
 
 AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLineEdit), typeSelection(new QComboBox){
     setModal(true);
-    setWindowFlag(Qt::FramelessWindowHint);
+    setWindowTitle("Inserisci un sensore");
 
     QVBoxLayout* layout=new QVBoxLayout;
     layout->setAlignment(Qt::AlignVCenter);
@@ -24,16 +24,19 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
     formLayout->setFormAlignment(Qt::AlignLeft);
 
     //Name Edit
+    nameEdit->setFixedWidth(220);
     formLayout->addRow("Nome", nameEdit);
 
     //Type selection
     typeSelection->setInsertPolicy(QComboBox::InsertAlphabetically);
-    typeSelection->setFrame(false);
+    typeSelection->setFrame(true);
     typeSelection->addItem("Qualità dell'aria");
     typeSelection->addItem("Elettricità");
     typeSelection->addItem("Pressione atmosferica");
     typeSelection->addItem("Temperatura e umidità");
+    typeSelection->setFixedWidth(220);
     formLayout->addRow("Tipologia di sensore", typeSelection);
+    formLayout->setLabelAlignment(Qt::AlignRight);
 
     //Submit Button
     QPushButton* submitButton=new QPushButton("Crea sensore");
@@ -64,11 +67,12 @@ void AddPanel::onSubmit(){
         done(QDialog::Accepted);
         app->setHomePanel();
     }else{
-        QMessageBox error(this);
-        error.setStandardButtons(QMessageBox::Close);
-        error.setModal(true);
-        error.setWindowFlag(Qt::FramelessWindowHint);
+        QMessageBox error;
+        setModal(true);
         error.setText("Per favore inserire un nome");
+        //pic=pic.scaledToWidth(230);
+        error.setIcon(QMessageBox::Critical);
+        error.addButton(QMessageBox::Ok);
         error.exec();
     }
 }

@@ -7,7 +7,7 @@
 #include <QSvgWidget>
 
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(main), layout(new QHBoxLayout), labelsLayout(new QVBoxLayout), labels(new QWidget), name(new QLabel(QString::fromStdString(sensor->getName()))), deleteButton(new QPushButton){
-    setStyleSheet("background-color: palette(base); border-radius: 12px;");
+    setStyleSheet("*{background-color: palette(base); border-radius: 12px;} ItemCard:hover{border: 2px solid #0ABAB5;} ItemCard:focus{border: 2px solid #0ABAB5;}");
     connect(main, &MainWindow::themeChanged, this, &ItemCard::updateBackground);
     setFixedSize(250,100);
 
@@ -89,7 +89,7 @@ void ItemCard::deleteItem(){
 }
 
 void ItemCard::updateBackground(){
-    setStyleSheet("background-color: palette(base); border-radius: 12px");
+    setStyleSheet("*{background-color: palette(base); border-radius: 12px;} ItemCard:hover{border: 2px solid #0ABAB5;} ItemCard:focus{border: 2px solid #0ABAB5;}");
 }
 
 ItemCard::~ItemCard(){

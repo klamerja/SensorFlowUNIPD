@@ -16,6 +16,5 @@ HomePanel::HomePanel() : logoLabel(new QLabel){
 }
 
 HomePanel::~HomePanel(){
-    //Attenzione a come si cancella!
     delete layout();
 }
