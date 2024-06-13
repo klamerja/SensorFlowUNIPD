@@ -6,12 +6,39 @@
 #include <QChart>
 #include <QDateTimeAxis>
 #include <QValueAxis>
-#include <QPushButton>
 #include <QPixmap>
-#include <QChartView>
 
 DataPanel::DataPanel(AbstractSensor* sensor, QTimer* t) : timer(t){
+    setFocusPolicy(Qt::NoFocus);
     sensor->request(this);
+}
+
+QChartView* DataPanel::chart(){
+    QChartView* view=new QChartView;
+    view->setFocusPolicy(Qt::NoFocus);
+    view->setMinimumSize(600,600);
+    view->setRenderHint(QPainter::Antialiasing);
+    return view;
+}
+
+QPushButton* DataPanel::leftBtn(){
+    QPushButton* button=new QPushButton;
+    button->setIcon(QIcon(":/assets/left.svg"));
+    button->setFixedSize(50,50);
+    button->setFlat(true);
+    button->setIconSize(QSize(25,25));
+    button->setFocusPolicy(Qt::NoFocus);
+    return button;
+}
+
+QPushButton* DataPanel::rightBtn(){
+    QPushButton* button=new QPushButton;
+    button->setIcon(QIcon(":/assets/right.svg"));
+    button->setFixedSize(50,50);
+    button->setFlat(true);
+    button->setIconSize(QSize(25,25));
+    button->setFocusPolicy(Qt::NoFocus);
+    return button;
 }
 
 void DataPanel::handle(const AirQualitySensor* sensor){
@@ -49,12 +76,9 @@ void DataPanel::handle(const AirQualitySensor* sensor){
     co2Chart->addAxis(yAxis1, Qt::AlignLeft);
     sensor->getCo2Vals()->attachAxis(yAxis1);
 
-    QChartView* view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setMinimumSize(600,600);
-    view->setChart(co2Chart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* co2View=chart();
+    co2View->setChart(co2Chart);
+    graphLayout->addWidget(co2View);
 
     //Grafico PM2.5
     QChart* pm25Chart=new QChart;
@@ -79,11 +103,9 @@ void DataPanel::handle(const AirQualitySensor* sensor){
     pm25Chart->addAxis(yAxis2, Qt::AlignLeft);
     sensor->getPm25Vals()->attachAxis(yAxis2);
 
-    view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setChart(pm25Chart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* pm25View=chart();
+    pm25View->setChart(pm25Chart);
+    graphLayout->addWidget(pm25View);
 
     //Grafico di PM10
     QChart* pm10Chart=new QChart;
@@ -108,11 +130,9 @@ void DataPanel::handle(const AirQualitySensor* sensor){
     pm10Chart->addAxis(yAxis3, Qt::AlignLeft);
     sensor->getPm10Vals()->attachAxis(yAxis3);
 
-    view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setChart(pm10Chart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* pm10View=chart();
+    pm10View->setChart(pm10Chart);
+    graphLayout->addWidget(pm10View);
 
     connect(timer, &QTimer::timeout, this, [=](){
         QDateTime currentTime=QDateTime::currentDateTime();
@@ -126,20 +146,8 @@ void DataPanel::handle(const AirQualitySensor* sensor){
     buttonLayout->setAlignment(Qt::AlignHCenter);
     layout->addLayout(buttonLayout);
 
-    QPushButton* leftButton=new QPushButton;
-    QPixmap leftImage(":/assets/left.png");
-    leftButton->setIcon(leftImage);
-    leftButton->setFixedSize(50,50);
-    leftButton->setFlat(true);
-    leftButton->setIconSize(QSize(25,25));
-
-    QPushButton* rightButton=new QPushButton;
-    QPixmap rightImage(":/assets/right.png");
-    rightButton->setIcon(rightImage);
-    rightButton->setFixedSize(50,50);
-    rightButton->setFlat(true);
-    rightButton->setIconSize(QSize(25,25));
-
+    QPushButton* leftButton=leftBtn();
+    QPushButton* rightButton=rightBtn();
     buttonLayout->addWidget(leftButton);
     buttonLayout->addWidget(rightButton);
 
@@ -191,12 +199,9 @@ void DataPanel::handle(const ElectricitySensor* sensor){
     wattChart->addAxis(yAxis1, Qt::AlignLeft);
     sensor->getWattVals()->attachAxis(yAxis1);
 
-    QChartView* view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setMinimumSize(600,600);
-    view->setChart(wattChart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* wattView=chart();
+    wattView->setChart(wattChart);
+    graphLayout->addWidget(wattView);
 
     //Grafico volt
     QChart* voltChart=new QChart;
@@ -221,11 +226,9 @@ void DataPanel::handle(const ElectricitySensor* sensor){
     voltChart->addAxis(yAxis2, Qt::AlignLeft);
     sensor->getVoltageVals()->attachAxis(yAxis2);
 
-    view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setChart(voltChart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* voltView=chart();
+    voltView->setChart(voltChart);
+    graphLayout->addWidget(voltView);
 
     connect(timer, &QTimer::timeout, this, [=](){
         QDateTime currentTime=QDateTime::currentDateTime();
@@ -238,20 +241,8 @@ void DataPanel::handle(const ElectricitySensor* sensor){
     buttonLayout->setAlignment(Qt::AlignHCenter);
     layout->addLayout(buttonLayout);
 
-    QPushButton* leftButton=new QPushButton;
-    QPixmap leftImage(":/assets/left.png");
-    leftButton->setIcon(leftImage);
-    leftButton->setFixedSize(50,50);
-    leftButton->setFlat(true);
-    leftButton->setIconSize(QSize(25,25));
-
-    QPushButton* rightButton=new QPushButton;
-    QPixmap rightImage(":/assets/right.png");
-    rightButton->setIcon(rightImage);
-    rightButton->setFixedSize(50,50);
-    rightButton->setFlat(true);
-    rightButton->setIconSize(QSize(25,25));
-
+    QPushButton* leftButton=leftBtn();
+    QPushButton* rightButton=rightBtn();
     buttonLayout->addWidget(leftButton);
     buttonLayout->addWidget(rightButton);
 
@@ -274,6 +265,7 @@ void DataPanel::handle(const PressureSensor* sensor){
     QHBoxLayout* layout=new QHBoxLayout;
     setLayout(layout);
 
+    //Grafico pressione
     QChart* pressureChart=new QChart;
     charts.push_back(pressureChart);
     pressureChart->setAnimationOptions(QChart::AllAnimations);
@@ -297,12 +289,9 @@ void DataPanel::handle(const PressureSensor* sensor){
     pressureChart->addAxis(yAxis, Qt::AlignLeft);
     sensor->getPressureVals()->attachAxis(yAxis);
 
-    QChartView* view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setMinimumSize(700,500);
-    view->setChart(pressureChart);
-    view->setRenderHint(QPainter::Antialiasing);
-    layout->addWidget(view);
+    QChartView* pressureView=chart();
+    pressureView->setChart(pressureChart);
+    layout->addWidget(pressureView);
 
     connect(timer, &QTimer::timeout, this, [=](){
         QDateTime currentTime=QDateTime::currentDateTime();
@@ -343,12 +332,9 @@ void DataPanel::handle(const TempHumiditySensor* sensor){
     tempChart->addAxis(yAxis1, Qt::AlignLeft);
     sensor->getTemperatureVals()->attachAxis(yAxis1);
 
-    QChartView* view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setMinimumSize(600,600);
-    view->setChart(tempChart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* tempView=chart();
+    tempView->setChart(tempChart);
+    graphLayout->addWidget(tempView);
 
     //Grafico umidità
     QChart* humidityChart=new QChart;
@@ -373,11 +359,9 @@ void DataPanel::handle(const TempHumiditySensor* sensor){
     humidityChart->addAxis(yAxis2, Qt::AlignLeft);
     sensor->getHumidityVals()->attachAxis(yAxis2);
 
-    view=new QChartView;
-    view->setFocusPolicy(Qt::NoFocus);
-    view->setChart(humidityChart);
-    view->setRenderHint(QPainter::Antialiasing);
-    graphLayout->addWidget(view);
+    QChartView* humidityView=chart();
+    humidityView->setChart(humidityChart);
+    graphLayout->addWidget(humidityView);
 
     connect(timer, &QTimer::timeout, this, [=](){
         QDateTime currentTime=QDateTime::currentDateTime();
@@ -390,20 +374,8 @@ void DataPanel::handle(const TempHumiditySensor* sensor){
     buttonLayout->setAlignment(Qt::AlignHCenter);
     layout->addLayout(buttonLayout);
 
-    QPushButton* leftButton=new QPushButton;
-    QPixmap leftImage(":/assets/left.png");
-    leftButton->setIcon(leftImage);
-    leftButton->setFixedSize(50,50);
-    leftButton->setFlat(true);
-    leftButton->setIconSize(QSize(25,25));
-
-    QPushButton* rightButton=new QPushButton;
-    QPixmap rightImage(":/assets/right.png");
-    rightButton->setIcon(rightImage);
-    rightButton->setFixedSize(50,50);
-    rightButton->setFlat(true);
-    rightButton->setIconSize(QSize(25,25));
-
+    QPushButton* leftButton=leftBtn();
+    QPushButton* rightButton=rightBtn();
     buttonLayout->addWidget(leftButton);
     buttonLayout->addWidget(rightButton);
 
@@ -430,5 +402,3 @@ DataPanel::~DataPanel(){
     }
     delete layout();
 }
-
-

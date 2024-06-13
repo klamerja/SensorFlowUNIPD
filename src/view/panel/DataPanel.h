@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QList>
+#include <QChartView>
+#include <QPushButton>
 
 #include "../../model/sensor/AbstractSensor.h"
 #include "../../model/sensor/PressureSensor.h"
@@ -17,6 +19,9 @@ private:
     QList<QChart*> charts;
 public:
     DataPanel(AbstractSensor*,QTimer*);
+    static QChartView* chart();
+    static QPushButton* leftBtn();
+    static QPushButton* rightBtn();
     virtual void handle(const AirQualitySensor*) override;
     virtual void handle(const ElectricitySensor*) override;
     virtual void handle(const PressureSensor*) override;

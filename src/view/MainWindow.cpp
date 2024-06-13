@@ -17,10 +17,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), controller(new Co
 
 void MainWindow::removeFocusedItem(){
     itemFocused=nullptr;
+    setHomePanel();
 }
 
 void MainWindow::createMenu(){
-    menuBar->setStyleSheet("background-color: #EFEFEF;");
+    menuBar->setFocusPolicy(Qt::NoFocus);
     setMenuBar(menuBar);
 
     //File Menu
@@ -77,9 +78,7 @@ void MainWindow::repaintSensorsList(std::vector<AbstractSensor*> sensors){
 }
 
 void MainWindow::deleteSensor(ItemCard* item){
-    if(item->hasFocus()){
-        setHomePanel();
-    }
+    setHomePanel();
     controller->deleteSensor(item->getSensor());
     delete item;
     if(itemFocused==item)itemFocused=nullptr;
@@ -97,7 +96,10 @@ void MainWindow::setHomePanel(){
 
 //SLOTS
 void MainWindow::newSensor(){
-    if(itemFocused)itemFocused->clearFocus();
+    if(itemFocused){
+        itemFocused->clearFocus();
+        removeFocusedItem();
+    }
     if(!controller->isJsonInstanced()){
         if(panel->layout()){
             delete panel->layout()->takeAt(0)->widget();
@@ -112,8 +114,7 @@ void MainWindow::removeSensor(){
     if(itemFocused){
         controller->deleteSensor(itemFocused->getSensor());
         delete itemFocused;
-        itemFocused=nullptr;
-        setHomePanel();
+        removeFocusedItem();
     }
 }
 
@@ -125,7 +126,6 @@ void MainWindow::onItemClicked(ItemCard* item){
     QHBoxLayout* layout=new QHBoxLayout;
     layout->addWidget(new DataPanel(item->getSensor(), controller->getTimer()));
     panel->setLayout(layout);
-    item->setFocus(Qt::MouseFocusReason);
     itemFocused=item;
 }
 

@@ -17,6 +17,8 @@ ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(
     deleteButton->setFlat(true);
     deleteButton->setIconSize(QSize(20,20));
 
+    setFocusPolicy(Qt::ClickFocus);
+
     connect(this, &ItemCard::itemClicked, mainWindow, &MainWindow::onItemClicked);
     connect(deleteButton, &QPushButton::clicked, this, &ItemCard::deleteItem);
 
@@ -76,7 +78,6 @@ void ItemCard::mousePressEvent(QMouseEvent*){
 
 void ItemCard::focusOutEvent(QFocusEvent *event){
     mainWindow->removeFocusedItem();
-    mainWindow->setHomePanel();
     QFrame::focusOutEvent(event);
 }
 

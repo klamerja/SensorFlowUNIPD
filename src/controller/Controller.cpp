@@ -2,7 +2,8 @@
 
 #include <QFileDialog>
 #include <QDebug>
-#include <string>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 Controller::Controller(MainWindow* m) : mainWindow(m),changed(false), sharedTimer(new QTimer){
     sharedTimer->start(2000);
@@ -66,10 +67,11 @@ void Controller::searchWidgets(const QString& text) const{
     if(text.isEmpty()){
         mainWindow->repaintSensorsList(sensors);
     }else{
+        QRegularExpression exp("^"+text);
         std::vector<AbstractSensor*> matches;
         for(AbstractSensor* sensor:sensors){
-            if(QString::fromStdString(sensor->getName()).contains(text, Qt::CaseInsensitive))
-                matches.push_back(sensor);
+            QRegularExpressionMatch match=exp.match(QString::fromStdString(sensor->getName()));
+            if(match.hasMatch())matches.push_back(sensor);
         }
         mainWindow->repaintSensorsList(matches);
     }
