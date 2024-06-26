@@ -2,14 +2,14 @@
 
 #include <QList>
 
-AirQualitySensor::AirQualitySensor(std::string n, QTimer* t, std::string i) :
-    AbstractSensor(n, t, i),
+AirQualitySensor::AirQualitySensor(std::string name, QTimer* timer, int dist, std::string id) :
+    AbstractSensor(name, timer, dist, id),
     co2(0),
     pm25(0),
     pm10(0),
-    co2Vals(new QSplineSeries),
-    pm25Vals(new QSplineSeries),
-    pm10Vals(new QSplineSeries) {}
+    co2Vals(new QLineSeries),
+    pm25Vals(new QLineSeries),
+    pm10Vals(new QLineSeries) {}
 
 int AirQualitySensor::getCo2() const{
     return co2;
@@ -23,15 +23,15 @@ double AirQualitySensor::getPm10() const{
     return pm10;
 }
 
-QSplineSeries* AirQualitySensor::getCo2Vals() const{
+QLineSeries* AirQualitySensor::getCo2Vals() const{
     return co2Vals;
 }
 
-QSplineSeries* AirQualitySensor::getPm25Vals() const{
+QLineSeries* AirQualitySensor::getPm25Vals() const{
     return pm25Vals;
 }
 
-QSplineSeries* AirQualitySensor::getPm10Vals() const{
+QLineSeries* AirQualitySensor::getPm10Vals() const{
     return pm10Vals;
 }
 
@@ -58,12 +58,12 @@ void AirQualitySensor::request(IConstSensorHandler* handler){
 void AirQualitySensor::onTimerTimeout(){
     qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
 
-    co2=randomGen->bounded(300,950); //ppm di co2
-    pm25=randomGen->bounded(35.0); //microgrammi per mc
-    pm10=randomGen->bounded(50.0); //microgrammi per mc
+    co2=genIntVal(300,950);
+    pm25=genDoubleVal(35.0);
+    pm10=genDoubleVal(50.0);
 
     co2Vals->append(currentTime, co2);
-    if(co2Vals->count()>20) co2Vals->remove(0);
+    if(co2Vals->count()>=20) co2Vals->remove(0);
 
     pm25Vals->append(currentTime, pm25);
     if(pm25Vals->count()>20) pm25Vals->remove(0);

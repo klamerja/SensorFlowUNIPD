@@ -5,6 +5,7 @@
 #include <QAction>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QMessageBox>
 
 #include "panel/HomePanel.h"
 #include "panel/DataPanel.h"
@@ -26,15 +27,17 @@ void MainWindow::createMenu(){
 
     //File Menu
     QMenu* fileMenu=menuBar->addMenu("File");
+    fileMenu->setFocusPolicy(Qt::NoFocus);
     QAction* newFile=fileMenu->addAction("Nuovo");
     newFile->setShortcut(Qt::CTRL | Qt::Key_N);
     QAction* openFile=fileMenu->addAction("Apri");
-    openFile->setShortcut(Qt::CTRL | Qt::Key_A);
+    openFile->setShortcut(Qt::CTRL | Qt::Key_O);
     QAction* saveFile=fileMenu->addAction("Salva");
     saveFile->setShortcut(Qt::CTRL | Qt::Key_S);
 
     //Sensors Menu
     QMenu* sensorsMenu=menuBar->addMenu("Sensori");
+    sensorsMenu->setFocusPolicy(Qt::NoFocus);
     QAction* newSensor=sensorsMenu->addAction("Aggiungi sensore");
     newSensor->setShortcut(Qt::CTRL | Qt::Key_T);
     QAction* deleteSensor=sensorsMenu->addAction("Rimuovi sensore");
@@ -69,8 +72,8 @@ void MainWindow::setupUI(){
     setHomePanel();
 }
 
-void MainWindow::addSensor(const QString& name, int type){
-    controller->addSensor(name, type);
+void MainWindow::addSensor(const QString& name, int type, int distribution){
+    controller->addSensor(name, type, distribution);
 }
 
 void MainWindow::repaintSensorsList(std::vector<AbstractSensor*> sensors){
@@ -94,19 +97,27 @@ void MainWindow::setHomePanel(){
     panel->setLayout(layout);
 }
 
+void MainWindow::refreshSensorsList(){
+    controller->refreshSensorsList();
+}
+
 //SLOTS
 void MainWindow::newSensor(){
-    if(itemFocused){
-        itemFocused->clearFocus();
-        removeFocusedItem();
-    }
-    if(!controller->isJsonInstanced()){
-        if(panel->layout()){
-            delete panel->layout()->takeAt(0)->widget();
-            delete panel->layout();
+    if(controller->isJsonInstanced()){
+        if(itemFocused){
+            itemFocused->clearFocus();
+            removeFocusedItem();
         }
-        AddPanel* addPanel=new AddPanel(this);
-        addPanel->exec();
+        setHomePanel();
+        AddPanel addPanel(this);
+        addPanel.exec();
+    }else{
+        QMessageBox warning;
+        warning.setModal(true);
+        warning.setText("File non aperto");
+        warning.setIcon(QMessageBox::Critical);
+        warning.addButton(QMessageBox::Ok);
+        warning.exec();
     }
 }
 
@@ -115,6 +126,14 @@ void MainWindow::removeSensor(){
         controller->deleteSensor(itemFocused->getSensor());
         delete itemFocused;
         removeFocusedItem();
+    }
+    if(!controller->isJsonInstanced()){
+        QMessageBox warning;
+        warning.setModal(true);
+        warning.setText("File non aperto");
+        warning.setIcon(QMessageBox::Critical);
+        warning.addButton(QMessageBox::Ok);
+        warning.exec();
     }
 }
 

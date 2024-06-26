@@ -4,7 +4,6 @@
 #include <QJsonDocument>
 #include <QString>
 #include <vector>
-#include <QMap>
 
 #include "../sensor/AbstractSensor.h"
 #include "../sensor/IConstSensorHandler.h"
@@ -15,10 +14,9 @@ private:
     QString path;
 public:
     JSONhandler(QString);
-    ~JSONhandler() =default;
+    virtual ~JSONhandler() =default;
     std::vector<AbstractSensor*> getSensors(QTimer*) const;
-    void addNewSensors(std::vector<AbstractSensor*>&);
-    void removeSensors(std::vector<AbstractSensor*>&);
+    void updateJSON(std::vector<AbstractSensor*>&);
     void handle(const AirQualitySensor*) override;
     void handle(const ElectricitySensor*) override;
     void handle(const PressureSensor*) override;

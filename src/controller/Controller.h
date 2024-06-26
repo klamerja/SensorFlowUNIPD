@@ -17,18 +17,16 @@ private:
     QString filePath;
     JSONhandler* jsonUtils;
     std::vector<AbstractSensor*> sensors;
-    bool changed;
-    std::vector<AbstractSensor*> notSaved;
-    std::vector<AbstractSensor*> toBeRemoved;
     QTimer* sharedTimer;
     void resetController();
 public:
     Controller(MainWindow*);
-    void addSensor(const QString&,int);
+    void addSensor(const QString&,int,int);
     void deleteSensor(AbstractSensor*);
     bool isJsonInstanced() const;
     QTimer* getTimer() const;
     void searchWidgets(const QString&) const;
+    void refreshSensorsList();
 public slots:
     void newFile();
     void openFile();

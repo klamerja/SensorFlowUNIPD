@@ -1,11 +1,11 @@
 #include "TempHumiditySensor.h"
 
-TempHumiditySensor::TempHumiditySensor(std::string n, QTimer* t, std::string i) :
-    AbstractSensor(n, t, i),
+TempHumiditySensor::TempHumiditySensor(std::string name, QTimer* timer, int dist, std::string id) :
+    AbstractSensor(name, timer, dist, id),
     temperature(0),
     humidity(0),
-    temperatureVals(new QSplineSeries),
-    humidityVals(new QSplineSeries) {}
+    temperatureVals(new QLineSeries),
+    humidityVals(new QLineSeries) {}
 
 int TempHumiditySensor::getTemperature() const{
     return temperature;
@@ -15,11 +15,11 @@ int TempHumiditySensor::getHumidity() const{
     return humidity;
 }
 
-QSplineSeries* TempHumiditySensor::getTemperatureVals() const{
+QLineSeries* TempHumiditySensor::getTemperatureVals() const{
     return temperatureVals;
 }
 
-QSplineSeries* TempHumiditySensor::getHumidityVals() const{
+QLineSeries* TempHumiditySensor::getHumidityVals() const{
     return humidityVals;
 }
 
@@ -42,8 +42,8 @@ void TempHumiditySensor::request(IConstSensorHandler* handler){
 void TempHumiditySensor::onTimerTimeout(){
     qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
 
-    temperature=randomGen->bounded(-10,35); //Gradi celsius
-    humidity=randomGen->bounded(0,100); //
+    temperature=genIntVal(-10, 35);
+    humidity=genIntVal(0,100);
 
     temperatureVals->append(currentTime, temperature);
     if(temperatureVals->count()>20)temperatureVals->remove(0);

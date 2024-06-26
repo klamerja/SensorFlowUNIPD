@@ -1,14 +1,14 @@
 #include "PressureSensor.h"
 
-PressureSensor::PressureSensor(std::string n, QTimer* t, std::string i) :
-    AbstractSensor(n, t, i), pressure(0),
-    pressureVals(new QSplineSeries) {}
+PressureSensor::PressureSensor(std::string name, QTimer* timer, int dist, std::string id) :
+    AbstractSensor(name, timer, dist, id), pressure(0),
+    pressureVals(new QLineSeries) {}
 
 double PressureSensor::getPressure() const{
     return pressure;
 }
 
-QSplineSeries* PressureSensor::getPressureVals() const{
+QLineSeries* PressureSensor::getPressureVals() const{
     return pressureVals;
 }
 
@@ -25,8 +25,9 @@ void PressureSensor::request(IConstSensorHandler* handler){
 }
 
 void PressureSensor::onTimerTimeout(){
-    pressure=randomGen->bounded(1094.0); //Misurata in hPa
+    qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
+    pressure=genDoubleVal(1094);
 
-    pressureVals->append(QDateTime::currentMSecsSinceEpoch(), pressure);
+    pressureVals->append(currentTime, pressure);
     if(pressureVals->count()>20) pressureVals->remove(0);
 }

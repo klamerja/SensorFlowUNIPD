@@ -28,7 +28,6 @@ private:
     QWidget* labels;
     QLabel* name;
     QLabel* type;
-    QPushButton* deleteButton;
 public:
     ItemCard(AbstractSensor*, MainWindow*);
     void handle(const AirQualitySensor*) override;
@@ -43,6 +42,7 @@ signals:
     void itemClicked(ItemCard*);
 public slots:
     void deleteItem();
+    void editItem();
 private slots:
     void updateBackground();
 };

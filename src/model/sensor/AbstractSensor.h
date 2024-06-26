@@ -6,7 +6,6 @@
 #include <QRandomGenerator>
 #include <QObject>
 #include <QLineSeries>
-#include <QSplineSeries>
 #include <QDateTime>
 
 #include "ISensorHandler.h"
@@ -17,15 +16,19 @@ private:
     std::string name;
     QTimer* timer;
     std::string id;
+    int distribution;
 protected:
-    QRandomGenerator* randomGen;
-    AbstractSensor(std::string, QTimer*, std::string i="");
+    AbstractSensor(std::string, QTimer*, int, std::string="");
+    int genIntVal(int min, int max);
+    double genDoubleVal(double max);
 public:
     virtual ~AbstractSensor() =0;
     std::string getName() const;
     void setName(std::string);
     std::string getId() const;
     void setId(std::string);
+    int getDistribution() const;
+    void setDistribution(int);
     virtual void request(ISensorHandler*) =0;
     virtual void request(IConstSensorHandler*) =0;
 signals:

@@ -1,18 +1,13 @@
-#include "AddPanel.h"
-
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QFormLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QMessageBox>
-#include <QPixmap>
-
+#include "EditPanel.h"
 #include "../MainWindow.h"
 
-AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLineEdit), typeSelection(new QComboBox), distributionSelection(new QComboBox){
+#include <QFormLayout>
+#include <QString>
+#include <QMessageBox>
+
+EditPanel::EditPanel(MainWindow* main, AbstractSensor* sens) : QDialog(main), app(main), sensor(sens), nameEdit(new QLineEdit), distributionSelection(new QComboBox){
     setModal(true);
-    setWindowTitle("Inserisci un sensore");
+    setWindowTitle("Modifica di " + QString::fromStdString(sensor->getName()));
 
     QVBoxLayout* layout=new QVBoxLayout;
     layout->setAlignment(Qt::AlignVCenter);
@@ -25,17 +20,8 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
 
     //Name Edit
     nameEdit->setFixedWidth(220);
+    nameEdit->setText(QString::fromStdString(sensor->getName()));
     formLayout->addRow("Nome", nameEdit);
-
-    //Type selection
-    typeSelection->setInsertPolicy(QComboBox::InsertAlphabetically);
-    typeSelection->setFrame(true);
-    typeSelection->addItem("Qualità dell'aria");
-    typeSelection->addItem("Elettricità");
-    typeSelection->addItem("Pressione atmosferica");
-    typeSelection->addItem("Temperatura e umidità");
-    typeSelection->setFixedWidth(220);
-    formLayout->addRow("Tipologia di sensore", typeSelection);
 
     //Distribution selection
     distributionSelection->setInsertPolicy(QComboBox::InsertAlphabetically);
@@ -44,6 +30,7 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
     distributionSelection->addItem("Gaussiana");
     distributionSelection->addItem("Uniforme");
     distributionSelection->setFixedWidth(220);
+    distributionSelection->setCurrentIndex(sensor->getDistribution());
     formLayout->addRow("Distribuzione", distributionSelection);
 
     //Submit Button
@@ -54,9 +41,9 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
     buttonLayout->addWidget(submitButton);
 
     //Connessione del submit
-    connect(this, &QDialog::rejected, this, &AddPanel::onReject);
-    connect(submitButton, &QPushButton::clicked, this, &AddPanel::onSubmit);
-
+    connect(this, &QDialog::rejected, this, &EditPanel::onReject);
+    connect(submitButton, &QPushButton::clicked, this, &EditPanel::onSubmit);
+    
     //Composizione form
     layout->addLayout(formLayout);
     layout->addLayout(buttonLayout);
@@ -65,18 +52,21 @@ AddPanel::AddPanel(MainWindow* main): QDialog(main), app(main), nameEdit(new QLi
     setFixedSize(sizeHint());
 }
 
-void AddPanel::onReject(){
+void EditPanel::onReject(){
     app->setHomePanel();
 }
 
-void AddPanel::onSubmit(){
+void EditPanel::onSubmit(){
     if(!nameEdit->text().isEmpty()){
-        app->addSensor(nameEdit->text(), typeSelection->currentIndex(), distributionSelection->currentIndex());
+        sensor->setName(nameEdit->text().toStdString());
+        sensor->setDistribution(distributionSelection->currentIndex());
         done(QDialog::Accepted);
+        app->refreshSensorsList();
     }else{
         QMessageBox error;
-        error.setModal(true);
+        setModal(true);
         error.setText("Per favore inserire un nome");
+        //pic=pic.scaledToWidth(230);
         error.setIcon(QMessageBox::Critical);
         error.addButton(QMessageBox::Ok);
         error.exec();

@@ -7,15 +7,15 @@ class TempHumiditySensor : public AbstractSensor{
 private:
     int temperature;
     int humidity;
-    QSplineSeries* temperatureVals;
-    QSplineSeries* humidityVals;
+    QLineSeries* temperatureVals;
+    QLineSeries* humidityVals;
 public:
-    TempHumiditySensor(std::string, QTimer*, std::string="");
+    TempHumiditySensor(std::string, QTimer*, int, std::string="");
     ~TempHumiditySensor() =default;
     int getTemperature() const;
     int getHumidity() const;
-    QSplineSeries* getTemperatureVals() const;
-    QSplineSeries* getHumidityVals() const;
+    QLineSeries* getTemperatureVals() const;
+    QLineSeries* getHumidityVals() const;
     void setTemperature(int);
     void setHumidity(int);
     void request(ISensorHandler*) override;

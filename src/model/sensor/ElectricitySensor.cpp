@@ -1,11 +1,11 @@
 #include "ElectricitySensor.h"
 
-ElectricitySensor::ElectricitySensor(std::string n, QTimer* t, std::string i) :
-    AbstractSensor(n, t, i),
+ElectricitySensor::ElectricitySensor(std::string name, QTimer* timer, int dist, std::string id) :
+    AbstractSensor(name, timer, dist, id),
     watt(0),
     voltage(0),
-    wattVals(new QSplineSeries),
-    voltageVals(new QSplineSeries) {}
+    wattVals(new QLineSeries),
+    voltageVals(new QLineSeries) {}
 
 double ElectricitySensor::getWatt() const{
     return watt;
@@ -15,11 +15,11 @@ int ElectricitySensor::getVoltage() const{
     return voltage;
 }
 
-QSplineSeries* ElectricitySensor::getWattVals() const{
+QLineSeries* ElectricitySensor::getWattVals() const{
     return wattVals;
 }
 
-QSplineSeries* ElectricitySensor::getVoltageVals() const{
+QLineSeries* ElectricitySensor::getVoltageVals() const{
     return voltageVals;
 }
 
@@ -41,13 +41,13 @@ void ElectricitySensor::request(IConstSensorHandler* handler){
 
 void ElectricitySensor::onTimerTimeout(){
     qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
-    watt=randomGen->bounded(3000.0); //Consumi in kWh
-    voltage=randomGen->bounded(220,231);
+    watt=genDoubleVal(3000.0);
+    voltage=genIntVal(220, 231);
 
     wattVals->append(currentTime, watt);
     if(wattVals->count()>20) wattVals->remove(0);
 
-    voltageVals->append(currentTime, watt);
+    voltageVals->append(currentTime, voltage);
     if(voltageVals->count()>20) voltageVals->remove(0);
 }
 

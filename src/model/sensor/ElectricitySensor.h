@@ -7,15 +7,15 @@ class ElectricitySensor : public AbstractSensor{
 private:
     double watt;
     int voltage;
-    QSplineSeries* wattVals;
-    QSplineSeries* voltageVals;
+    QLineSeries* wattVals;
+    QLineSeries* voltageVals;
 public:
-    ElectricitySensor(std::string, QTimer*, std::string="");
+    ElectricitySensor(std::string, QTimer*, int, std::string="");
     ~ElectricitySensor() =default;
     double getWatt() const;
     int getVoltage() const;
-    QSplineSeries* getWattVals() const;
-    QSplineSeries* getVoltageVals() const;
+    QLineSeries* getWattVals() const;
+    QLineSeries* getVoltageVals() const;
     void setWatt(double);
     void setVoltage(int);
     void request(ISensorHandler*) override;

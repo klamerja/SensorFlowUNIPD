@@ -1,7 +1,6 @@
 TEMPLATE = app
 TARGET = SensorFlow
 INCLUDEPATH += .
-ICON = SensorFlow.icns
 QT += core widgets charts svg svgwidgets gui
 
 # Input
@@ -15,6 +14,7 @@ SOURCES += main.cpp \
     model/sensor/TempHumiditySensor.cpp \
     view/MainWindow.cpp \
     view/panel/AddPanel.cpp \
+    view/panel/EditPanel.cpp \
     view/panel/DataPanel.cpp \
     view/panel/HomePanel.cpp \
     view/sensorMenu/ItemCard.cpp \
@@ -34,6 +34,7 @@ HEADERS += \
     model/sensor/TempHumiditySensor.h \
     view/MainWindow.h \
     view/panel/AddPanel.h \
+    view/panel/EditPanel.h \
     view/panel/DataPanel.h \
     view/panel/HomePanel.h \
     view/sensorMenu/ItemCard.h \

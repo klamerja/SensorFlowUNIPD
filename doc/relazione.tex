@@ -3,6 +3,9 @@
 \usepackage{graphicx}
 \usepackage{bookmark}
 \usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{upgreek}
+\usepackage[italian]{babel}
 
 \begin{document}
     \begin{titlepage}
@@ -40,5 +43,47 @@
             Università degli Studi di Padova
         \end{center}
     \end{titlepage}
-    
+    \section{Introduzione}
+    \subsection{Abstract}
+    \textbf{SensorFlow} è un software di gestione per sensori in ambito domotico. Ogni sensore è identificato tramite un UUID ed è caratterizzato da un nome, dalla tipologia e dalla distribuzione dei dati generati.\\
+    Le tipologie di sensori per cui l'applicazione fornisce supporto sono:
+    \begin{itemize}
+        \item \textbf{Temperatura e umidità}: permette di analizzare la temperatura (in °C) e l'umidità (in percentuale)
+        \item \textbf{Pressione atmosferica} (in hPa - ettopascal) 
+        \item \textbf{Elettricità}: permette di analizzare il consumo istantaneo (in W - watt) e la tensione elettrica (in V - volt)
+        \item \textbf{Qualità dell'aria}: permette di analizzare i livelli di CO2 (in ppm - parti per milione), il PM2.5 ed il PM10 (in $\upmu$g/m$^3$)
+    \end{itemize}
+    Le operazioni principali che l'applicazione permette di svolgere sono:
+    \begin{itemize}
+        \item aggiunta/rimozione dei sensori
+        \item modifica delle informazioni relative ai singoli sensori
+        \item visualizzazione dei dati generati
+    \end{itemize}
+    \subsection{Glossario}
+    \section*{Descrizione del modello}
+    \section*{Polimorfismo}
+    \section*{Persistenza dei dati}
+    \section*{Funzionalità implementate}
+    \section*{Rendicontazione ore}
+    \begin{center}
+        \begin{tabular}{|l|c|c|}
+            \hline
+            \textbf{Attività} & \textbf{Ore Previste} & \textbf{Ore effettive} \\
+            \hline
+            Studio e progettazione & 10 & 10 \\
+            \hline
+            Sviluppo del codice del modello & 10 & 10 \\
+            \hline
+            Studio del framework Qt & 10 & 10 \\
+            \hline
+            Sviluppo del codice della GUI & 10 & 10 \\
+            \hline
+            Test e debug & 10 & 10 \\
+            \hline
+            Stesura della relazione & 10 & 10 \\
+            \hline
+            \textbf{Totale} & 10 & \textbf{10} \\
+            \hline
+        \end{tabular}
+    \end{center}
 \end{document}

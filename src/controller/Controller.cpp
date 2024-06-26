@@ -1,44 +1,44 @@
 #include "Controller.h"
+#include "model/json/JSONhandler.h"
 
 #include <QFileDialog>
 #include <QDebug>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QMessageBox>
 
-Controller::Controller(MainWindow* m) : mainWindow(m),changed(false), sharedTimer(new QTimer){
+Controller::Controller(MainWindow* m) : mainWindow(m), jsonUtils(nullptr), sharedTimer(new QTimer){
     sharedTimer->start(2000);
 }
 
 void Controller::resetController(){
     filePath="";
-    if(jsonUtils)delete jsonUtils;
+    if(jsonUtils){
+        delete jsonUtils;
+        jsonUtils=nullptr;
+    }
     sensors.clear();
-    toBeRemoved.clear();
-    changed=false;
 }
 
-void Controller::addSensor(const QString& name, int type){
+void Controller::addSensor(const QString& name, int type, int distribution){
     AbstractSensor* sensor;
     switch(type){
         case sensorType::AirQuality:
-            sensor=new AirQualitySensor(name.toStdString(), sharedTimer);
+            sensor=new AirQualitySensor(name.toStdString(), sharedTimer, distribution);
         break;
         case sensorType::Electricity:
-            sensor=new ElectricitySensor(name.toStdString(), sharedTimer);
+            sensor=new ElectricitySensor(name.toStdString(), sharedTimer, distribution);
         break;
         case sensorType::Pressure:
-            sensor=new PressureSensor(name.toStdString(), sharedTimer);
+            sensor=new PressureSensor(name.toStdString(), sharedTimer, distribution);
         break;
         case sensorType::TemperatureHumidity:
-            sensor=new TempHumiditySensor(name.toStdString(), sharedTimer);
+            sensor=new TempHumiditySensor(name.toStdString(), sharedTimer, distribution);
         break;
     }
 
     //Aggiornamento vettori
-    changed=true;
     sensors.push_back(sensor);
-    notSaved.push_back(sensor);
-
     mainWindow->repaintSensorsList(sensors);
 }
 
@@ -46,8 +46,6 @@ void Controller::deleteSensor(AbstractSensor* sensor){
     auto it=sensors.begin();
     while(it!=sensors.end()){
         if((*it)->getId()==sensor->getId()){
-            changed=true;
-            toBeRemoved.push_back((*it));
             sensors.erase(it);
         }else{
             ++it;
@@ -77,14 +75,19 @@ void Controller::searchWidgets(const QString& text) const{
     }
 }
 
+void Controller::refreshSensorsList(){
+    mainWindow->repaintSensorsList(sensors);
+}
+
 //Slots
 void Controller::newFile(){
     resetController();
     filePath=QFileDialog::getSaveFileName(mainWindow, ("Crea nuovo file"), QDir::homePath(), "JSON Files (*.json)");
     if(!filePath.isEmpty()){
-        if(jsonUtils==nullptr){
-            jsonUtils=new JSONhandler(filePath);
-        }
+        delete jsonUtils;
+        jsonUtils=new JSONhandler(filePath);
+        sensors=jsonUtils->getSensors(sharedTimer); //Non serve
+        mainWindow->repaintSensorsList(sensors);
     }
 }
 
@@ -92,20 +95,21 @@ void Controller::openFile(){
     resetController();
     filePath=QFileDialog::getOpenFileName(mainWindow, ("Apri file"), QDir::homePath(),  "JSON Files (*.json)");
     if(!filePath.isEmpty()){
-        if(jsonUtils==nullptr){
-            jsonUtils=new JSONhandler(filePath);
-        }
+        delete jsonUtils;
+        jsonUtils=new JSONhandler(filePath);
+        sensors=jsonUtils->getSensors(sharedTimer);
+        mainWindow->repaintSensorsList(sensors);
     }
 }
 
 void Controller::saveFile(){
-    if(changed){
-        //Rimozione dal JSON dei sensori eliminati
-        jsonUtils->removeSensors(toBeRemoved);
-        //Salvataggio sensori nuovi
-        jsonUtils->addNewSensors(notSaved);
-        changed=false;
+    if(jsonUtils)jsonUtils->updateJSON(sensors);
+    else{
+        QMessageBox warning;
+        warning.setModal(true);
+        warning.setText("File non aperto");
+        warning.setIcon(QMessageBox::Critical);
+        warning.addButton(QMessageBox::Ok);
+        warning.exec();
     }
 }
-
-

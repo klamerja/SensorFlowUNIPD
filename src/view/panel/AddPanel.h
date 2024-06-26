@@ -12,6 +12,7 @@ private:
     MainWindow* app;
     QLineEdit* nameEdit;
     QComboBox* typeSelection;
+    QComboBox* distributionSelection;
 public:
     AddPanel(MainWindow*);
 public slots:

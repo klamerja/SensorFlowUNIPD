@@ -8,18 +8,18 @@ private:
     int co2;
     double pm25;
     double pm10;
-    QSplineSeries* co2Vals;
-    QSplineSeries* pm25Vals;
-    QSplineSeries* pm10Vals;
+    QLineSeries* co2Vals;
+    QLineSeries* pm25Vals;
+    QLineSeries* pm10Vals;
 public:
-    AirQualitySensor(std::string, QTimer*, std::string="");
+    AirQualitySensor(std::string, QTimer*, int, std::string="");
     ~AirQualitySensor() =default;
     int getCo2() const;
     double getPm25() const;
     double getPm10() const;
-    QSplineSeries* getCo2Vals() const;
-    QSplineSeries* getPm25Vals() const;
-    QSplineSeries* getPm10Vals() const;
+    QLineSeries* getCo2Vals() const;
+    QLineSeries* getPm25Vals() const;
+    QLineSeries* getPm10Vals() const;
     void setCo2(int);
     void setPm25(double);
     void setPm10(double);

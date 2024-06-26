@@ -13,6 +13,7 @@ class SensorMenu;
 class ItemCard;
 
 enum sensorType {AirQuality, Electricity, Pressure, TemperatureHumidity};
+enum distributionType {Casual, Gauss, Uniform};
 
 class MainWindow : public QMainWindow{
     Q_OBJECT
@@ -27,10 +28,11 @@ private:
 public:
     explicit MainWindow(QWidget* parent=0);
     void removeFocusedItem();
-    void addSensor(const QString&,int);
+    void addSensor(const QString&,int,int);
     void repaintSensorsList(std::vector<AbstractSensor*>);
     void deleteSensor(ItemCard*);
     void setHomePanel();
+    void refreshSensorsList();
 protected:
     bool event(QEvent* event) override;
 public slots:

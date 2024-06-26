@@ -12,6 +12,7 @@
         <file>assets/AddButton.svg</file>
 
         <file>assets/Delete.svg</file>
+        <file>assets/Edit.svg</file>
         <file>assets/left.svg</file>
         <file>assets/right.svg</file>
     </qresource>
