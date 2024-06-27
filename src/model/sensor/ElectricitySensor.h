@@ -19,8 +19,8 @@ public:
     void setWatt(double);
     void setVoltage(int);
     void request(ISensorHandler*) override;
-    void request(IConstSensorHandler*) override;
-public slots:
+    void request(IConstSensorHandler*) const override;
+private slots:
     void onTimerTimeout() override;
 };
 

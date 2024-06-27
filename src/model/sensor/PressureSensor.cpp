@@ -20,7 +20,7 @@ void PressureSensor::request(ISensorHandler* handler){
     handler->handle(this);
 }
 
-void PressureSensor::request(IConstSensorHandler* handler){
+void PressureSensor::request(IConstSensorHandler* handler) const{
     handler->handle(this);
 }
 

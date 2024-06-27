@@ -24,8 +24,8 @@ public:
     void setPm25(double);
     void setPm10(double);
     void request(ISensorHandler*) override;
-    void request(IConstSensorHandler*) override;
-public slots:
+    void request(IConstSensorHandler*) const override;
+private slots:
     void onTimerTimeout() override;
 };
 

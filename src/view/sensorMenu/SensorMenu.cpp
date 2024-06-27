@@ -10,7 +10,7 @@
 #include <QLineEdit>
 
 SensorMenu::SensorMenu(MainWindow* main) : app(main), sensorsContainer(new QWidget){
-    setFixedWidth(300);
+    setFixedWidth(340);
 
     setStyleSheet("background-color: palette(window)");
     connect(main, &MainWindow::themeChanged, this, &SensorMenu::updateBackground);

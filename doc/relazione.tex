@@ -5,6 +5,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{upgreek}
+\usepackage{float}
 \usepackage[italian]{babel}
 
 \begin{document}
@@ -31,6 +32,9 @@
 
             \url{https://github.com/klamerja/SensorFlowUNIPD}
 
+            \vspace{1.5cm}
+
+            \tableofcontents
             \vfill
 
             \LARGE
@@ -44,7 +48,6 @@
         \end{center}
     \end{titlepage}
     \section{Introduzione}
-    \subsection{Abstract}
     \textbf{SensorFlow} è un software di gestione per sensori in ambito domotico. Ogni sensore è identificato tramite un UUID ed è caratterizzato da un nome, dalla tipologia e dalla distribuzione dei dati generati.\\
     Le tipologie di sensori per cui l'applicazione fornisce supporto sono:
     \begin{itemize}
@@ -59,12 +62,34 @@
         \item modifica delle informazioni relative ai singoli sensori
         \item visualizzazione dei dati generati
     \end{itemize}
-    \subsection{Glossario}
-    \section*{Descrizione del modello}
-    \section*{Polimorfismo}
-    \section*{Persistenza dei dati}
-    \section*{Funzionalità implementate}
-    \section*{Rendicontazione ore}
+    Una delle caratteristiche fondamentali del software è quella di poter visualizzare i dati generati dal sensore in tempo reale.\\
+    I dati, per fornire una simulazione del sensore, sono generati secondo una tipologia di distribuzione tra le seguenti:
+    \begin{itemize}
+        \item Casuale
+        \item Uniforme
+        \item Gaussiana
+    \end{itemize}
+    L'utente ha la possibilità di decidere quale distribuzione adottare per ogni singolo sensore e di modificarla in un secondo momento.
+    \section{Descrizione del modello}
+    Il modello logico è strutturato in due parti: la prima parte comprende le classi che descrivono i vari sensori utilizzabili all'interno dell'applicativo, mentre la seconda parte si occupa di creazione, lettura e aggiornamento del file JSON che si occupa del salvataggio dei sensori.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.3]{assets/UML.png}
+        \caption{Diagramma delle classi dei sensori}
+    \end{figure}
+    \texttt{AbstractSensor} è la classe base astratta che rappresenta le informazioni comuni a tutti i sensori che possono essere creati, ovvero il nome, il timer, l'identificatore univoco UUID e la tipologia di distribuzione. Oltre ai relativi metodi \emph{getter} e \emph{setter} per le varie variabili d'istanza, 
+    è presente il metodo \texttt{onTimerTimeout}, che si occupa di effettuare delle azioni ad ogni \emph{timeout} emesso dal timer: solitamente, le azioni che vengono performate sono quelle di aggiornamento dei valori dei dati che vengono generati dal sensore, oltre a cancellare valori dalle eventuali serie che risultano non necessarie ai fini del funzionamento del software e, in particolare, per la generazione del grafico. Le classi figlie di \texttt{AbstractSensor} sono:
+    \begin{itemize}
+        \item \texttt{PressureSensor}
+        \item \texttt{TempHumidity}
+        \item \texttt{AirQualitySensor}
+        \item \texttt{ElectricitySensor}
+    \end{itemize}
+
+    \section{Polimorfismo}
+    \section{Persistenza dei dati}
+    \section{Funzionalità implementate}
+    \section{Rendicontazione ore}
     \begin{center}
         \begin{tabular}{|l|c|c|}
             \hline

@@ -51,7 +51,7 @@ void AirQualitySensor::request(ISensorHandler* handler){
     handler->handle(this);
 }
 
-void AirQualitySensor::request(IConstSensorHandler* handler){
+void AirQualitySensor::request(IConstSensorHandler* handler) const{
     handler->handle(this);
 }
 

@@ -16,8 +16,8 @@ public:
     QLineSeries* getPressureVals() const;
     void setPressure(double);
     void request(ISensorHandler*) override;
-    void request(IConstSensorHandler*) override;
-public slots:
+    void request(IConstSensorHandler*) const override;
+private slots:
     void onTimerTimeout() override;
 };
 

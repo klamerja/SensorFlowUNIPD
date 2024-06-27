@@ -35,7 +35,7 @@ void TempHumiditySensor::request(ISensorHandler* handler){
     handler->handle(this);
 }
 
-void TempHumiditySensor::request(IConstSensorHandler* handler){
+void TempHumiditySensor::request(IConstSensorHandler* handler) const{
     handler->handle(this);
 }
 

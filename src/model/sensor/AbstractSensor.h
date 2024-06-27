@@ -30,11 +30,8 @@ public:
     int getDistribution() const;
     void setDistribution(int);
     virtual void request(ISensorHandler*) =0;
-    virtual void request(IConstSensorHandler*) =0;
-signals:
-    void refreshVal();
+    virtual void request(IConstSensorHandler*) const =0;
 private slots:
-    void changeVal();
     virtual void onTimerTimeout()=0;
 };
 

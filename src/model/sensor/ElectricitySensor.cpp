@@ -35,7 +35,7 @@ void ElectricitySensor::request(ISensorHandler* handler){
     handler->handle(this);
 }
 
-void ElectricitySensor::request(IConstSensorHandler* handler){
+void ElectricitySensor::request(IConstSensorHandler* handler) const{
     handler->handle(this);
 }
 
