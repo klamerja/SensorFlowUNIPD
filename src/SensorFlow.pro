@@ -40,7 +40,7 @@ HEADERS += \
     view/sensorMenu/ItemCard.h \
     view/sensorMenu/SensorMenu.h \
     view/components/SearchBar.h \
-    view/components/AddButton.h 
+    view/components/AddButton.h
 
 RESOURCES += \
     resources.qrc

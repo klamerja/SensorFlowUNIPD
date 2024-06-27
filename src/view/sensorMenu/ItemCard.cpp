@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QIcon>
 #include <QSvgWidget>
+#include <QFocusEvent>
 
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(main), layout(new QHBoxLayout), labelsLayout(new QVBoxLayout), labels(new QWidget), name(new QLabel(QString::fromStdString(sensor->getName()))){
     setStyleSheet("*{background-color: palette(base); border-radius: 12px;} ItemCard:hover{border: 2px solid #0ABAB5;} ItemCard:focus{border: 2px solid #0ABAB5;}");
@@ -84,8 +85,10 @@ void ItemCard::mousePressEvent(QMouseEvent*){
 }
 
 void ItemCard::focusOutEvent(QFocusEvent *event){
-    mainWindow->removeFocusedItem();
-    QFrame::focusOutEvent(event);
+    if(event->reason()!=Qt::PopupFocusReason && event->reason()!=Qt::ActiveWindowFocusReason){
+        mainWindow->removeFocusedItem();
+        QFrame::focusOutEvent(event);
+    }
 }
 
 AbstractSensor* ItemCard::getSensor() const{

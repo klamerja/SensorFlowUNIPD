@@ -22,8 +22,8 @@ void MainWindow::removeFocusedItem(){
 }
 
 void MainWindow::createMenu(){
+    setMenuWidget(menuBar);
     menuBar->setFocusPolicy(Qt::NoFocus);
-    setMenuBar(menuBar);
 
     //File Menu
     QMenu* fileMenu=menuBar->addMenu("File");
