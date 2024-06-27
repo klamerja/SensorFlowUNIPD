@@ -5,13 +5,12 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QJsonValueRef>
-#include <cstdlib>
 
-#include "../sensor/AirQualitySensor.h"
-#include "../sensor/ElectricitySensor.h"
-#include "../sensor/PressureSensor.h"
-#include "../sensor/TempHumiditySensor.h"
-#include "../../controller/Controller.h"
+#include "model/sensor/AirQualitySensor.h"
+#include "model/sensor/ElectricitySensor.h"
+#include "model/sensor/PressureSensor.h"
+#include "model/sensor/TempHumiditySensor.h"
+#include "controller/Controller.h"
 
 JSONhandler::JSONhandler(QString p) : path(p){
     QFile jsonFile(path);
@@ -40,16 +39,16 @@ std::vector<AbstractSensor*> JSONhandler::getSensors(QTimer* sharedTimer) const{
                 QJsonObject sensor((*it).toObject());
                 switch(sensor["type"].toInt()){
                     case sensorType::TemperatureHumidity:
-                        sensors.push_back(new TempHumiditySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distibution"].toInt(), sensor["id"].toString().toStdString()));
+                        sensors.push_back(new TempHumiditySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distribution"].toInt(), sensor["id"].toString().toStdString()));
                     break;
                     case sensorType::AirQuality:
-                        sensors.push_back(new AirQualitySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distibution"].toInt(), sensor["id"].toString().toStdString()));
+                        sensors.push_back(new AirQualitySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distribution"].toInt(), sensor["id"].toString().toStdString()));
                     break;
                     case sensorType::Electricity:
-                        sensors.push_back(new ElectricitySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distibution"].toInt(), sensor["id"].toString().toStdString()));
+                        sensors.push_back(new ElectricitySensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distribution"].toInt(), sensor["id"].toString().toStdString()));
                     break;
                     case sensorType::Pressure:
-                        sensors.push_back(new PressureSensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distibution"].toInt(), sensor["id"].toString().toStdString()));
+                        sensors.push_back(new PressureSensor(sensor["name"].toString().toStdString(), sharedTimer, sensor["distribution"].toInt(), sensor["id"].toString().toStdString()));
                     break;
                     default:
                         qTerminate();

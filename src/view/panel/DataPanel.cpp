@@ -293,7 +293,7 @@ void DataPanel::handle(const PressureSensor* sensor){
     xAxis->setFormat("hh.mm");
     xAxis->setTitleText("Ora");
     pressureChart->addAxis(xAxis, Qt::AlignBottom);
-    sensor->getPressureVals()->attachAxis(xAxis); //Inserito altrimenti non fa il repaint con la modifica
+    sensor->getPressureVals()->attachAxis(xAxis);
 
     QValueAxis* yAxis=new QValueAxis;
     yAxis->setGridLineVisible(false);

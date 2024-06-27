@@ -11,7 +11,7 @@
 ItemCard::ItemCard(AbstractSensor* s, MainWindow* main) : sensor(s), mainWindow(main), layout(new QHBoxLayout), labelsLayout(new QVBoxLayout), labels(new QWidget), name(new QLabel(QString::fromStdString(sensor->getName()))){
     setStyleSheet("*{background-color: palette(base); border-radius: 12px;} ItemCard:hover{border: 2px solid #0ABAB5;} ItemCard:focus{border: 2px solid #0ABAB5;}");
     connect(main, &MainWindow::themeChanged, this, &ItemCard::updateBackground);
-    setFixedSize(300,100);
+    setFixedSize(290,100);
 
     QIcon editIcon(":/assets/Edit.svg");
     QPushButton* editButton=new QPushButton;

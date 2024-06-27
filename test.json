@@ -1,0 +1,76 @@
+{
+    "sensors": [
+        {
+            "distribution": 0,
+            "id": "1f85ad17-ddb6-4f55-b7c7-17810a8df3b1",
+            "name": "AQ_Casuale",
+            "type": 0
+        },
+        {
+            "distribution": 1,
+            "id": "ac835a07-4597-473d-88a8-ea1b45b206e1",
+            "name": "AQ_Gaussiana",
+            "type": 0
+        },
+        {
+            "distribution": 2,
+            "id": "ecdf8aff-7992-4800-afab-f5ed37f33a39",
+            "name": "AQ_Uniforme",
+            "type": 0
+        },
+        {
+            "distribution": 0,
+            "id": "d8ac36bb-6b22-4764-a980-2241a30fcd2d",
+            "name": "Elec_Casuale",
+            "type": 1
+        },
+        {
+            "distribution": 1,
+            "id": "575472a4-88bc-4438-b5ad-185b4bdb8f05",
+            "name": "Elec_Gaussiana",
+            "type": 1
+        },
+        {
+            "distribution": 2,
+            "id": "870835eb-2787-43f7-a0de-933f88232c97",
+            "name": "Elec_Uniforme",
+            "type": 1
+        },
+        {
+            "distribution": 0,
+            "id": "4b274d7c-8b5f-4cbd-b1c6-18a073b742f9",
+            "name": "ATM_Casuale",
+            "type": 2
+        },
+        {
+            "distribution": 1,
+            "id": "3f6b633c-1c60-4d40-9a9e-670ad1a66e55",
+            "name": "ATM_Gaussiana",
+            "type": 2
+        },
+        {
+            "distribution": 2,
+            "id": "d4f7cb65-06df-448a-9a55-10ff7c4fee72",
+            "name": "ATM_Uniforme",
+            "type": 2
+        },
+        {
+            "distribution": 0,
+            "id": "b93a1fb3-348b-4dea-81a1-cde5bdc482b5",
+            "name": "TempHum_Casuale",
+            "type": 3
+        },
+        {
+            "distribution": 1,
+            "id": "9c4d8143-8dbf-4ca1-a9f4-42d6b5a8ec14",
+            "name": "TempHum_Gaussiana",
+            "type": 3
+        },
+        {
+            "distribution": 2,
+            "id": "f0ef098d-c61d-4c5d-b994-f83fe68e7302",
+            "name": "TempHum_Uniforme",
+            "type": 3
+        }
+    ]
+}

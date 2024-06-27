@@ -26,7 +26,7 @@ SearchBar::SearchBar(MainWindow* main){
     searchIcon->setAutoFillBackground(false);
 
     QLineEdit* searchEdit=new QLineEdit;
-    searchEdit->setStyleSheet("background-color: rgba(0,0,0,0)"); //Guarda qua
+    searchEdit->setStyleSheet("background-color: rgba(0,0,0,0)");
     searchEdit->setAutoFillBackground(true);
     searchEdit->setFrame(false);
     searchEdit->setFixedHeight(20);

@@ -5,8 +5,8 @@
 #include <QString>
 #include <vector>
 
-#include "../sensor/AbstractSensor.h"
-#include "../sensor/IConstSensorHandler.h"
+#include "model/sensor/AbstractSensor.h"
+#include "model/sensor/IConstSensorHandler.h"
 
 class JSONhandler : public IConstSensorHandler{
 private:

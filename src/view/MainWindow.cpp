@@ -52,7 +52,6 @@ void MainWindow::createMenu(){
 }
 
 void MainWindow::setupUI(){
-    //Dimensione minima del panel
     QHBoxLayout* hLayout=new QHBoxLayout;
     QVBoxLayout* vLayout=new QVBoxLayout;
     hLayout->setAlignment(Qt::AlignHCenter);

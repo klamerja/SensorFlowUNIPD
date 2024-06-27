@@ -34,7 +34,7 @@ EditPanel::EditPanel(MainWindow* main, AbstractSensor* sens) : QDialog(main), ap
     formLayout->addRow("Distribuzione", distributionSelection);
 
     //Submit Button
-    QPushButton* submitButton=new QPushButton("Crea sensore");
+    QPushButton* submitButton=new QPushButton("Modifica sensore");
     submitButton->setDefault(true);
     QHBoxLayout* buttonLayout=new QHBoxLayout;
     buttonLayout->setAlignment(Qt::AlignHCenter);
@@ -66,7 +66,6 @@ void EditPanel::onSubmit(){
         QMessageBox error;
         setModal(true);
         error.setText("Per favore inserire un nome");
-        //pic=pic.scaledToWidth(230);
         error.setIcon(QMessageBox::Critical);
         error.addButton(QMessageBox::Ok);
         error.exec();
