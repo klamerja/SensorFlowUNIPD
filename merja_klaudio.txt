@@ -1,0 +1,44 @@
+Feedback Progetto di Programmazione ad Oggetti
+Studente: Merja Klaudio
+Valutazione del progetto: Eccellente
+
+Vincoli obbligatori
++ Soddisfatti
+
+
+Orientamento ad oggetti
++ Incapsulamento
++ Modularità (modello logico e la GUI sono separati)
++ Estensibilità ed evolvibilità, polimorfismo
++ Efficienza e robustezza
+
+
+Funzionalità
++ Funzionalità di ricerca e filtro
++ Ricerca in tempo reale
++ Simulazione dinamica
++ Divese grandezze simulate per i diversi tipi di sensore
++ Navigazione tra le diverse grandezze misurate
++ Uso ragionevole del polimorfismo
+- Migiorabile rendendo la ricerca case-insensitive
+
+
+GUI
++ Usabile e intuitiva
++ Robusta, gestisce ridimensionamento
++ Utilizza icone
++ Utilizza immagini
++ Utilizza colori e stili
+- Migliorabile mostrando una lista di grandezze misurate
+  (per esempio per la qualità dell'aria sono previste tre misure,
+  ma non c'è modo di sapere quali siano se non visualizzandole
+  tutte e tre, una per una)
+
+
+
+Relazione
++ Adeguata
+
+
+Suggerimenti non collegati alla valutazione
+Nessuno.
